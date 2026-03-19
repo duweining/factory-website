@@ -107,12 +107,54 @@ export default function App() {
             }
           />
           <Route path="/admin/login" element={<AdminLogin />} />
-          <Route path="/admin/dashboard" element={<AdminDashboard />} />
-          <Route path="/admin/products" element={<AdminProducts />} />
-          <Route path="/admin/news" element={<AdminNews />} />
-          <Route path="/admin/cases" element={<AdminCases />} />
-          <Route path="/admin/settings" element={<AdminSettings />} />
-          <Route path="/admin/seo" element={<AdminSeo />} />
+          <Route
+            path="/admin/dashboard"
+            element={
+              <AdminLayout>
+                <AdminDashboard />
+              </AdminLayout>
+            }
+          />
+          <Route
+            path="/admin/products"
+            element={
+              <AdminLayout>
+                <AdminProducts />
+              </AdminLayout>
+            }
+          />
+          <Route
+            path="/admin/news"
+            element={
+              <AdminLayout>
+                <AdminNews />
+              </AdminLayout>
+            }
+          />
+          <Route
+            path="/admin/cases"
+            element={
+              <AdminLayout>
+                <AdminCases />
+              </AdminLayout>
+            }
+          />
+          <Route
+            path="/admin/seo"
+            element={
+              <AdminLayout>
+                <AdminSeo />
+              </AdminLayout>
+            }
+          />
+          <Route
+            path="/admin/settings"
+            element={
+              <AdminLayout>
+                <AdminSettings />
+              </AdminLayout>
+            }
+          />
         </Routes>
       </div>
     </BrowserRouter>
