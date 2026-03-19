@@ -19,6 +19,16 @@ export default function AdminSettings() {
     phone: '',
     email: '',
     website: '',
+    contact_person: '',
+    contact_phone1: '',
+    contact_phone2: '',
+    contact_phone3: '',
+    contact_phone4: '',
+    contact_phone5: '',
+    wechat: '',
+    qq: '',
+    fax: '',
+    business_hours: '',
   })
 
   const [passwordForm, setPasswordForm] = useState({
