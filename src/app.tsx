@@ -7,11 +7,13 @@ import ProductDetailPage from './pages/ProductDetailPage'
 import NewsPage from './pages/NewsPage'
 import NewsDetailPage from './pages/NewsDetailPage'
 import ContactPage from './pages/ContactPage'
+import CasesPage from './pages/CasesPage'
 import AdminLogin from './pages/admin/AdminLogin'
 import AdminDashboard from './pages/admin/AdminDashboard'
 import AdminProducts from './pages/admin/AdminProducts'
 import AdminNews from './pages/admin/AdminNews'
 import AdminSettings from './pages/admin/AdminSettings'
+import AdminCases from './pages/admin/AdminCases'
 
 export default function App() {
   return (
