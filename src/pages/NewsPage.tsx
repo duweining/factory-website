@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Calendar, User, ChevronRight } from 'lucide-react'
+import { Calendar, User } from 'lucide-react'
 import { NewsS8B8A8A895Row } from '@/types/database'
 import { supabase } from '@/lib/supabase'
 
