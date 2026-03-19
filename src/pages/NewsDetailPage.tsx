@@ -18,6 +18,7 @@ export default function NewsDetailPage() {
 
   async function fetchNews(newsId: number) {
     try {
+      console.log('Fetching news:', newsId)
       const { data, error } = await supabase
         .from('news_s_8b8a8a89_5')
         .select('*')
@@ -25,7 +26,11 @@ export default function NewsDetailPage() {
         .eq('is_deleted', 'n')
         .single()
 
-      if (error) throw error
+      if (error) {
+        console.error('Error fetching news:', error)
+        throw error
+      }
+      console.log('Fetched news:', data)
       setNews(data)
 
       // Update view count
