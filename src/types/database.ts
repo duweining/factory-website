@@ -12,7 +12,7 @@ export interface AdminUsersRow {
   created_at: string | null;
   updated_at: string | null;
 }
-export type AdminUsersInsert = Omit<AdminUsersRow, 'id' | 'corp_id' | 'emp_id' | 'is_deleted' | 'created_at' | 'updated_at'>;
+export type AdminUsersInsert = Omit<AdminUsersRow, 'id', 'corp_id', 'emp_id', 'is_deleted', 'created_at', 'updated_at'>;
 export type AdminUsersUpdate = Partial<AdminUsersInsert>;
 
 export interface CasesS8B8A8A895Row {
@@ -30,7 +30,7 @@ export interface CasesS8B8A8A895Row {
   created_at: string | null;
   updated_at: string | null;
 }
-export type CasesS8B8A8A895Insert = Omit<CasesS8B8A8A895Row, 'id', 'corp_id', 'emp_id', 'is_deleted', 'created_at', 'updated_at'>;
+export type CasesS8B8A8A895Insert = Omit<CasesS8B8A8A895Row, 'id' | 'corp_id' | 'emp_id' | 'is_deleted' | 'created_at' | 'updated_at'>;
 export type CasesS8B8A8A895Update = Partial<CasesS8B8A8A895Insert>;
 
 export interface CompaniesS8B8A8A895Row {
@@ -101,5 +101,5 @@ export interface SeoSettingsS8B8A8A895Row {
   created_at: string | null;
   updated_at: string | null;
 }
-export type SeoSettingsS8B8A8A895Insert = Omit<SeoSettingsS8B8A8A895Row, 'id', 'corp_id', 'emp_id', 'is_deleted', 'created_at', 'updated_at'>;
+export type SeoSettingsS8B8A8A895Insert = Omit<SeoSettingsS8B8A8A895Row, 'id' | 'corp_id' | 'emp_id' | 'is_deleted' | 'created_at' | 'updated_at'>;
 export type SeoSettingsS8B8A8A895Update = Partial<SeoSettingsS8B8A8A895Insert>;
