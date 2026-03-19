@@ -14,6 +14,7 @@ import AdminProducts from './pages/admin/AdminProducts'
 import AdminNews from './pages/admin/AdminNews'
 import AdminSettings from './pages/admin/AdminSettings'
 import AdminCases from './pages/admin/AdminCases'
+import AdminSeo from './pages/admin/AdminSeo'
 
 export default function App() {
   return (
