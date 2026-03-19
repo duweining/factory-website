@@ -27,6 +27,7 @@ export default function AdminAutoNews() {
 
   useEffect(() => {
     fetchConfig()
+    checkAndRunScheduledTask()
   }, [])
 
   async function fetchConfig() {
