@@ -219,7 +219,7 @@ export default function AdminNews() {
                   {item.author || '-'}
                 </td>
                 <td className="px-6 py-4 text-sm text-gray-500">
-                  {new Date(item.published_at || item.created_at).toLocaleString('zh-CN', {
+                  {new Date(item.published_at || item.created_at || '').toLocaleString('zh-CN', {
                     year: 'numeric',
                     month: 'long',
                     day: 'numeric',
