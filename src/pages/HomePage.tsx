@@ -16,6 +16,7 @@ export default function HomePage() {
 
   async function fetchFeaturedProducts() {
     try {
+      console.log('Fetching featured products...')
       const { data, error } = await supabase
         .from('products_s_8b8a8a89_5')
         .select('*')
@@ -25,7 +26,11 @@ export default function HomePage() {
         .order('created_at', { ascending: false })
         .limit(6)
 
-      if (error) throw error
+      if (error) {
+        console.error('Error fetching featured products:', error)
+        throw error
+      }
+      console.log('Fetched featured products:', data)
       setFeaturedProducts(data || [])
     } catch (error) {
       console.error('Error fetching featured products:', error)
