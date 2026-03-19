@@ -81,11 +81,14 @@ export default function AdminAutoNews() {
           type: 'error',
           text: '关键词数量必须在 10-15 个之间（当前：' + keywordArray.length + '个）',
         })
+        setSaving(false)
         return
       }
 
+      let result
       if (config) {
-        const { error } = await supabase
+        // 更新现有配置
+        const { data: updateData, error } = await supabase
           .from('auto_news_config')
           .update({
             keywords: keywordArray,
@@ -93,25 +96,50 @@ export default function AdminAutoNews() {
             updated_at: new Date().toISOString(),
           })
           .eq('id', config.id)
+          .select()
 
-        if (error) throw error
+        if (error) {
+          console.error('Update error:', error)
+          if (error.code === '42501') {
+            throw new Error('您没有权限执行此操作，请联系管理员')
+          }
+          throw error
+        }
+        
+        result = updateData
+        console.log('Update successful:', updateData)
       } else {
-        const { error } = await supabase
+        // 插入新配置
+        const { data: insertData, error } = await supabase
           .from('auto_news_config')
           .insert([{
             keywords: keywordArray,
             is_enabled: isEnabled,
-            next_run_time: new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString(),
+            next_run_time: isEnabled 
+              ? new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString()
+              : null,
           }])
+          .select()
 
-        if (error) throw error
+        if (error) {
+          console.error('Insert error:', error)
+          if (error.code === '42501') {
+            throw new Error('您没有权限执行此操作，请联系管理员')
+          }
+          throw error
+        }
+        
+        result = insertData
+        console.log('Insert successful:', insertData)
       }
 
+      // 立即刷新配置
+      await fetchConfig()
+      
       setMessage({ type: 'success', text: '保存成功！系统将在每天早上 8 点自动生成新闻。' })
-      fetchConfig()
     } catch (error) {
       console.error('Error saving config:', error)
-      setMessage({ type: 'error', text: '保存失败，请重试' })
+      setMessage({ type: 'error', text: '保存失败：' + (error as Error).message })
     } finally {
       setSaving(false)
     }
