@@ -379,7 +379,7 @@ export default function AdminProducts() {
                   </label>
                 </div>
 
-                {formData.images && formData.images.length > 0 && (
+                {formData.images && (formData.images as string[]).length > 0 && (
                   <div className="grid grid-cols-2 md:grid-cols-5 gap-4 mt-4">
                     {(formData.images as string[]).map((img, index) => (
                       <div key={index} className="relative aspect-square">
