@@ -275,6 +275,5 @@ function RelatedProducts({ currentProductId, category }: { currentProductId: num
         </div>
       </div>
     </section>
-    )
-  }
+  )
 }
