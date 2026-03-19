@@ -217,8 +217,10 @@ export default function HomePage() {
 }
 
 function ProductCard({ product }: { product: ProductsS8B8A8A895Row }) {
+  const { company } = useCompany()
   const images = (product.images as string[] | null) || []
   const mainImage = images[0]
+  const logoUrl = company?.logo
 
   console.log('ProductCard rendering for:', product.name, 'with images:', images)
 
@@ -227,9 +229,12 @@ function ProductCard({ product }: { product: ProductsS8B8A8A895Row }) {
       <div className="bg-white rounded-xl overflow-hidden shadow-sm card-hover">
         <div className="aspect-w-4 aspect-h-3 bg-gray-200 relative overflow-hidden">
           {mainImage ? (
-            <img
+            <WatermarkImage
               src={mainImage}
               alt={product.name}
+              logoUrl={logoUrl}
+              position="center"
+              logoScale={0.25}
               className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-300"
               onError={(e) => {
                 console.error('Image failed to load:', mainImage)
