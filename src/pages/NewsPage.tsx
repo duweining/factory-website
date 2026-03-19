@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Calendar, User, ChevronRight, ChevronLeft, ChevronDown } from 'lucide-react'
+import { Calendar, User, ChevronRight, ChevronLeft } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { NewsS8B8A8A895Row, ProductsS8B8A8A895Row, CasesS8B8A8A895Row } from '@/types/database'
 import { supabase } from '@/lib/supabase'
