@@ -68,7 +68,7 @@ function generateNewsContent(index: number, title: string): string {
   
   let content = `${intro}\n\n`
   
-  features.forEach((para, idx) => {
+  features.forEach((para) => {
     content += `${para}\n\n`
   })
   
