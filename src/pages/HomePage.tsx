@@ -41,6 +41,9 @@ export default function HomePage() {
     }
   }
 
+  const displayedProducts = showAllProducts ? featuredProducts : featuredProducts.slice(0, 6)
+  const hasMoreProducts = featuredProducts.length > 6
+
   if (companyLoading) {
     return <div className="min-h-screen flex items-center justify-center">加载中...</div>
   }
