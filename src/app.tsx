@@ -20,7 +20,7 @@ import AdminAutoNews from './pages/admin/AdminAutoNews'
 
 export default function App() {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <div className="min-h-screen flex flex-col">
         <Routes>
           <Route
