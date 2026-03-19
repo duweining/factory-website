@@ -181,11 +181,11 @@ export default function AdminProducts() {
   }
 
   const removeImage = (index: number) => {
-    const images = (formData.images as string[]) || []
+    const images = formData.images || []
     setFormData({
       ...formData,
       images: images.filter((_, i) => i !== index),
-    } as Partial<ProductsS8B8A8A895Insert>)
+    })
   }
 
   if (loading) {
