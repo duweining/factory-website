@@ -218,6 +218,17 @@ export default function AdminNews() {
                 <td className="px-6 py-4 text-sm text-gray-500">
                   {item.author || '-'}
                 </td>
+                <td className="px-6 py-4 text-sm text-gray-500">
+                  {new Date(item.published_at || item.created_at).toLocaleString('zh-CN', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric',
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    second: '2-digit',
+                    hour12: false,
+                  })}
+                </td>
                 <td className="px-6 py-4">
                   {item.is_featured ? (
                     <span className="px-3 py-1 bg-red-100 text-red-800 rounded-full text-xs font-medium">
