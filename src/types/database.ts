@@ -12,7 +12,7 @@ export interface AdminUsersRow {
   created_at: string | null;
   updated_at: string | null;
 }
-export type AdminUsersInsert = Omit<AdminUsersRow, 'id' | 'corp_id' | 'emp_id' | 'is_deleted' | 'created_at' | 'updated_at'>;
+export type AdminUsersInsert = Omit<AdminUsersRow, 'id', 'corp_id', 'emp_id', 'is_deleted', 'created_at', 'updated_at'>;
 export type AdminUsersUpdate = Partial<AdminUsersInsert>;
 
 export interface CasesS8B8A8A895Row {
@@ -30,7 +30,7 @@ export interface CasesS8B8A8A895Row {
   created_at: string | null;
   updated_at: string | null;
 }
-export type CasesS8B8A8A895Insert = Omit<CasesS8B8A8A895Row, 'id' | 'corp_id' | 'emp_id' | 'is_deleted' | 'created_at' | 'updated_at'>;
+export type CasesS8B8A8A895Insert = Omit<CasesS8B8A8A895Row, 'id', 'corp_id', 'emp_id', 'is_deleted', 'created_at', 'updated_at'>;
 export type CasesS8B8A8A895Update = Partial<CasesS8B8A8A895Insert>;
 
 export interface CompaniesS8B8A8A895Row {
@@ -48,8 +48,18 @@ export interface CompaniesS8B8A8A895Row {
   is_deleted: string | null;
   created_at: string | null;
   updated_at: string | null;
+  contact_person: string | null;
+  contact_phone1: string | null;
+  contact_phone2: string | null;
+  contact_phone3: string | null;
+  contact_phone4: string | null;
+  contact_phone5: string | null;
+  wechat: string | null;
+  qq: string | null;
+  fax: string | null;
+  business_hours: string | null;
 }
-export type CompaniesS8B8A8A895Insert = Omit<CompaniesS8B8A8A895Row, 'id' | 'corp_id' | 'emp_id' | 'is_deleted' | 'created_at' | 'updated_at'>;
+export type CompaniesS8B8A8A895Insert = Omit<CompaniesS8B8A8A895Row, 'id', 'corp_id', 'emp_id', 'is_deleted', 'created_at', 'updated_at'>;
 export type CompaniesS8B8A8A895Update = Partial<CompaniesS8B8A8A895Insert>;
 
 export interface NewsS8B8A8A895Row {
@@ -68,7 +78,7 @@ export interface NewsS8B8A8A895Row {
   created_at: string | null;
   updated_at: string | null;
 }
-export type NewsS8B8A8A895Insert = Omit<NewsS8B8A8A895Row, 'id' | 'corp_id' | 'emp_id' | 'is_deleted' | 'created_at' | 'updated_at'>;
+export type NewsS8B8A8A895Insert = Omit<NewsS8B8A8A895Row, 'id', 'corp_id', 'emp_id', 'is_deleted', 'created_at', 'updated_at'>;
 export type NewsS8B8A8A895Update = Partial<NewsS8B8A8A895Insert>;
 
 export interface ProductsS8B8A8A895Row {
@@ -79,14 +89,14 @@ export interface ProductsS8B8A8A895Row {
   description: string | null;
   category: string | null;
   price: number | null;
-  images: string[] | null;
+  images: Record<string, unknown> | null;
   sort_order: number | null;
   is_featured: boolean | null;
   is_deleted: string | null;
   created_at: string | null;
   updated_at: string | null;
 }
-export type ProductsS8B8A8A895Insert = Omit<ProductsS8B8A8A895Row, 'id' | 'corp_id' | 'emp_id' | 'is_deleted' | 'created_at' | 'updated_at'>;
+export type ProductsS8B8A8A895Insert = Omit<ProductsS8B8A8A895Row, 'id', 'corp_id', 'emp_id', 'is_deleted', 'created_at', 'updated_at'>;
 export type ProductsS8B8A8A895Update = Partial<ProductsS8B8A8A895Insert>;
 
 export interface SeoSettingsS8B8A8A895Row {
@@ -101,5 +111,5 @@ export interface SeoSettingsS8B8A8A895Row {
   created_at: string | null;
   updated_at: string | null;
 }
-export type SeoSettingsS8B8A8A895Insert = Omit<SeoSettingsS8B8A8A895Row, 'id' | 'corp_id' | 'emp_id' | 'is_deleted' | 'created_at' | 'updated_at'>;
+export type SeoSettingsS8B8A8A895Insert = Omit<SeoSettingsS8B8A8A895Row, 'id', 'corp_id', 'emp_id', 'is_deleted', 'created_at', 'updated_at'>;
 export type SeoSettingsS8B8A8A895Update = Partial<SeoSettingsS8B8A8A895Insert>;
