@@ -17,7 +17,6 @@ export default function WatermarkImage({
 }: WatermarkImageProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const [watermarkedSrc, setWatermarkedSrc] = useState<string>('')
-  const [imageLoaded, setImageLoaded] = useState(false)
 
   useEffect(() => {
     if (!src || !logoUrl) {
