@@ -103,6 +103,7 @@ export default function AdminNews() {
       cover_image: item.cover_image || '',
       view_count: item.view_count || 0,
       is_featured: item.is_featured || false,
+      published_at: item.published_at || item.created_at,
     })
     setShowModal(true)
   }
