@@ -119,13 +119,17 @@ export default function AdminSettings() {
     }
 
     try {
-      const { data: user } = await supabase
-        .from('admin_users')
-        .select('*')
-        .eq('username', localStorage.getItem('admin_username'))
-        .single()
+      // 从 localStorage 获取当前登录用户信息
+      const adminUserStr = localStorage.getItem('admin_user')
+      if (!adminUserStr) {
+        alert('请先登录')
+        return
+      }
+      
+      const currentUser = JSON.parse(adminUserStr)
 
-      if (!user || user.password_hash !== passwordForm.oldPassword) {
+      // 验证原密码
+      if (currentUser.password_hash !== passwordForm.oldPassword) {
         alert('原密码错误')
         return
       }
@@ -133,9 +137,13 @@ export default function AdminSettings() {
       const { error } = await supabase
         .from('admin_users')
         .update({ password_hash: passwordForm.newPassword })
-        .eq('id', user.id)
+        .eq('id', currentUser.id)
 
       if (error) throw error
+
+      // 更新 localStorage 中的密码
+      const updatedUser = { ...currentUser, password_hash: passwordForm.newPassword }
+      localStorage.setItem('admin_user', JSON.stringify(updatedUser))
 
       alert('密码修改成功')
       setPasswordForm({ oldPassword: '', newPassword: '', confirmPassword: '' })
