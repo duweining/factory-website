@@ -1,50 +1,102 @@
 import { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { useParams, Link, useNavigate } from 'react-router-dom'
 import { Calendar, User, ChevronLeft, Eye } from 'lucide-react'
-import { NewsS8B8A8A895Row } from '@/types/database'
+import { NewsS8B8A8A895Row, ProductsS8B8A8A895Row, CasesS8B8A8A895Row } from '@/types/database'
 import { supabase } from '@/lib/supabase'
+import { useCompany } from '@/hooks/useCompany'
+import WatermarkImage from '@/components/WatermarkImage'
 
 export default function NewsDetailPage() {
   const { id } = useParams<{ id: string }>()
   const navigate = useNavigate()
   const [news, setNews] = useState<NewsS8B8A8A895Row | null>(null)
   const [loading, setLoading] = useState(true)
+  const [products, setProducts] = useState<ProductsS8B8A8A895Row[]>([])
+  const [cases, setCases] = useState<CasesS8B8A8A895Row[]>([])
+  const [randomImages, setRandomImages] = useState<string[]>([])
+  const { company } = useCompany()
 
   useEffect(() => {
     if (id) {
-      fetchNews(parseInt(id))
+      fetchAllData(parseInt(id))
     }
   }, [id])
 
-  async function fetchNews(newsId: number) {
+  async function fetchAllData(newsId: number) {
     try {
-      console.log('Fetching news:', newsId)
-      const { data, error } = await supabase
+      // Fetch news
+      const { data: newsData, error: newsError } = await supabase
         .from('news_s_8b8a8a89_5')
         .select('*')
         .eq('id', newsId)
         .eq('is_deleted', 'n')
         .single()
 
-      if (error) {
-        console.error('Error fetching news:', error)
-        throw error
-      }
-      console.log('Fetched news:', data)
-      setNews(data)
+      if (newsError) throw newsError
+      setNews(newsData)
 
       // Update view count
-      if (data) {
+      if (newsData) {
         await supabase
           .from('news_s_8b8a8a89_5')
-          .update({ view_count: (data.view_count || 0) + 1 })
+          .update({ view_count: (newsData.view_count || 0) + 1 })
           .eq('id', newsId)
       }
+
+      // Fetch products
+      const { data: productsData, error: productsError } = await supabase
+        .from('products_s_8b8a8a89_5')
+        .select('*')
+        .eq('is_deleted', 'n')
+
+      if (productsError) throw productsError
+      setProducts(productsData || [])
+
+      // Fetch cases
+      const { data: casesData, error: casesError } = await supabase
+        .from('cases_s_8b8a8a89_5')
+        .select('*')
+        .eq('is_deleted', 'n')
+
+      if (casesError) throw casesError
+      setCases(casesData || [])
     } catch (error) {
-      console.error('Error fetching news:', error)
+      console.error('Error fetching data:', error)
     } finally {
       setLoading(false)
     }
+  }
+
+  useEffect(() => {
+    if (products.length > 0 || cases.length > 0) {
+      generateRandomImages()
+    }
+  }, [products, cases])
+
+  function generateRandomImages() {
+    const allImages: string[] = []
+    
+    // Extract product images
+    products.forEach((product) => {
+      const images = (product.images as string[] | null) || []
+      images.forEach((img) => {
+        if (img && !allImages.includes(img)) {
+          allImages.push(img)
+        }
+      })
+    })
+
+    // Extract case images
+    cases.forEach((caseItem) => {
+      if (caseItem.image_url && !allImages.includes(caseItem.image_url)) {
+        allImages.push(caseItem.image_url)
+      }
+    })
+
+    // Shuffle and pick 6 images
+    const shuffled = allImages.sort(() => Math.random() - 0.5)
+    setRandomImages(shuffled.slice(0, 6))
   }
 
   if (loading) {
