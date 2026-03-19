@@ -194,6 +194,16 @@ export default function AdminAutoNews() {
   }
 
   async function handleGenerateNow() {
+    if (!config) {
+      setMessage({ type: 'error', text: '请先保存配置并启动自动发布功能' })
+      return
+    }
+
+    if (!isEnabled) {
+      setMessage({ type: 'error', text: '请先启动自动发布功能，然后才能生成新闻' })
+      return
+    }
+
     if (!confirm('确定要立即生成一篇新闻吗？')) return
 
     setSaving(true)
@@ -204,6 +214,10 @@ export default function AdminAutoNews() {
       
       if (error) {
         console.error('RPC error:', error)
+        // 检查是否是权限错误
+        if (error.code === '42501' || error.status === 403) {
+          throw new Error('您没有权限执行此操作，请联系管理员')
+        }
         throw error
       }
       
