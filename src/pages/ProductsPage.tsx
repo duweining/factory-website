@@ -5,8 +5,9 @@ import { ProductsS8B8A8A895Row } from '@/types/database'
 import { supabase } from '@/lib/supabase'
 import { useCompany } from '@/hooks/useCompany'
 import WatermarkImage from '@/components/WatermarkImage'
+import SeoProvider from '@/components/SeoProvider'
 
-export default function ProductsPage() {
+function ProductsPageContent() {
   const [products, setProducts] = useState<ProductsS8B8A8A895Row[]>([])
   const [loading, setLoading] = useState(true)
   const [searchTerm, setSearchTerm] = useState('')
