@@ -165,14 +165,84 @@ function NewsPageContent() {
               <p className="text-xl text-gray-600">暂无新闻</p>
             </div>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {filteredNews.map((item) => (
-                <NewsCard key={item.id} news={item} />
-              ))}
-            </div>
+            <>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {paginatedNews.map((item) => (
+                  <NewsCard key={item.id} news={item} />
+                ))}
+              </div>
+
+              {/* Pagination and Total Count */}
+              <div className="mt-12 flex flex-col items-center space-y-4">
+                <div className="text-sm text-gray-600">
+                  共计 <span className="font-bold text-primary-600">{filteredNews.length}</span> 条新闻
+                </div>
+                {totalPages > 1 && (
+                  <div className="flex items-center space-x-2">
+                    <button
+                      onClick={() => handlePageChange(currentPage - 1)}
+                      disabled={currentPage === 1}
+                      className="p-2 rounded-lg border border-gray-300 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                    >
+                      <ChevronLeft className="w-5 h-5" />
+                    </button>
+                    
+                    {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+                      <button
+                        key={page}
+                        onClick={() => handlePageChange(page)}
+                        className={`min-w-[40px] h-10 rounded-lg font-medium transition-colors ${
+                          currentPage === page
+                            ? 'bg-primary-600 text-white'
+                            : 'border border-gray-300 hover:bg-gray-50'
+                        }`}
+                      >
+                        {page}
+                      </button>
+                    ))}
+
+                    <button
+                      onClick={() => handlePageChange(currentPage + 1)}
+                      disabled={currentPage === totalPages}
+                      className="p-2 rounded-lg border border-gray-300 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                    >
+                      <ChevronRight className="w-5 h-5" />
+                    </button>
+                  </div>
+                )}
+              </div>
+            </>
           )}
         </div>
       </section>
+
+      {/* Random Images Gallery */}
+      {randomImages.length > 0 && (
+        <section className="py-12 bg-gray-50">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 className="text-2xl font-bold text-gray-900 mb-8 text-center">精彩展示</h2>
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+              {randomImages.map((imageUrl, index) => (
+                <div
+                  key={index}
+                  className="aspect-w-4 aspect-h-3 bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow"
+                >
+                  <WatermarkImage
+                    src={imageUrl}
+                    alt={`展示图片 ${index + 1}`}
+                    logoUrl={company?.logo_url}
+                    className="w-full h-full object-cover hover:scale-110 transition-transform duration-300"
+                    onError={(e) => {
+                      const target = e.target as HTMLImageElement
+                      target.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23f3f4f6" width="400" height="300"/%3E%3Ctext fill="%239ca3af" x="50%25" y="50%25" dominant-baseline="middle" text-anchor="middle" font-size="20"%3E图片加载失败%3C/text%3E%3C/svg%3E'
+                    }}
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
     </div>
   )
 }
