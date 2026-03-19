@@ -93,13 +93,6 @@ export default function Navbar() {
                 {link.label}
               </Link>
             ))}
-            <Link
-              to="/admin/login"
-              className="block w-full text-center px-6 py-3 bg-primary-600 text-white rounded-lg btn-glow font-medium"
-              onClick={() => setIsMobileMenuOpen(false)}
-            >
-              管理后台
-            </Link>
           </div>
         </div>
       )}
