@@ -1,4 +1,4 @@
-import { MapPin, Phone, Mail, Clock, Globe, User, Wechat, MessageCircle, Fax } from 'lucide-react'
+import { MapPin, Phone, Mail, Clock, Globe, User, MessageSquare } from 'lucide-react'
 import { useCompany } from '@/hooks/useCompany'
 import SeoProvider from '@/components/SeoProvider'
 
