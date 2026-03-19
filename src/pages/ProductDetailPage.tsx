@@ -273,7 +273,8 @@ function RelatedProducts({ currentProductId, category }: { currentProductId: num
             </Link>
           ))}
         </div>
-      </section>
+      </div>
+    </section>
     )
   }
 }
