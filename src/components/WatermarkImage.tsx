@@ -1,10 +1,14 @@
 import { useState, useEffect, useRef } from 'react'
 
+type WatermarkPosition = 'all' | 'center'
+
 interface WatermarkImageProps {
   src: string
   alt: string
   logoUrl?: string | null
   className?: string
+  position?: WatermarkPosition
+  logoScale?: number
   onError?: (e: React.SyntheticEvent<HTMLImageElement>) => void
 }
 
@@ -13,6 +17,8 @@ export default function WatermarkImage({
   alt, 
   logoUrl, 
   className = '',
+  position = 'all',
+  logoScale = 0.3,
   onError 
 }: WatermarkImageProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
@@ -43,16 +49,24 @@ export default function WatermarkImage({
       ctx.drawImage(mainImage, 0, 0)
       
       logoImage.onload = () => {
-        const logoWidth = canvas.width * 0.3
+        const logoWidth = canvas.width * logoScale
         const logoHeight = (logoImage.naturalHeight / logoImage.naturalWidth) * logoWidth
         
         ctx.globalAlpha = 0.3
         
-        const positions = [
-          { x: canvas.width * 0.05, y: canvas.height * 0.05 },
-          { x: canvas.width / 2 - logoWidth / 2, y: canvas.height / 2 - logoHeight / 2 },
-          { x: canvas.width - logoWidth - canvas.width * 0.05, y: canvas.height - logoHeight - canvas.height * 0.05 }
-        ]
+        let positions: { x: number; y: number }[] = []
+        
+        if (position === 'center') {
+          positions = [
+            { x: canvas.width / 2 - logoWidth / 2, y: canvas.height / 2 - logoHeight / 2 }
+          ]
+        } else {
+          positions = [
+            { x: canvas.width * 0.05, y: canvas.height * 0.05 },
+            { x: canvas.width / 2 - logoWidth / 2, y: canvas.height / 2 - logoHeight / 2 },
+            { x: canvas.width - logoWidth - canvas.width * 0.05, y: canvas.height - logoHeight - canvas.height * 0.05 }
+          ]
+        }
         
         positions.forEach(pos => {
           ctx.drawImage(logoImage, pos.x, pos.y, logoWidth, logoHeight)
@@ -78,7 +92,7 @@ export default function WatermarkImage({
     }
     
     mainImage.src = src
-  }, [src, logoUrl, onError])
+  }, [src, logoUrl, position, logoScale, onError])
 
   const handleContextMenu = (e: React.MouseEvent<HTMLImageElement>) => {
     e.preventDefault()
