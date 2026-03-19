@@ -318,7 +318,7 @@ export default function AdminNews() {
                 </label>
                 <textarea
                   rows={2}
-                  value={formData.summary}
+                  value={formData.summary || ''}
                   onChange={(e) =>
                     setFormData({ ...formData, summary: e.target.value })
                   }
