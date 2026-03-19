@@ -97,7 +97,7 @@ export default function AdminProducts() {
       description: product.description || '',
       category: product.category || '',
       price: product.price || undefined,
-      images: product.images as string[] || [],
+      images: (product.images as string[]) || [],
       sort_order: product.sort_order || 0,
       is_featured: product.is_featured || false,
     })
