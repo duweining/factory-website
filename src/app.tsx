@@ -3,7 +3,9 @@ import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 import HomePage from './pages/HomePage'
 import ProductsPage from './pages/ProductsPage'
+import ProductDetailPage from './pages/ProductDetailPage'
 import NewsPage from './pages/NewsPage'
+import NewsDetailPage from './pages/NewsDetailPage'
 import ContactPage from './pages/ContactPage'
 import AdminLogin from './pages/admin/AdminLogin'
 import AdminDashboard from './pages/admin/AdminDashboard'
@@ -41,12 +43,36 @@ export default function App() {
             }
           />
           <Route
+            path="/products/:id"
+            element={
+              <>
+                <Navbar />
+                <main className="flex-grow pt-20">
+                  <ProductDetailPage />
+                </main>
+                <Footer />
+              </>
+            }
+          />
+          <Route
             path="/news"
             element={
               <>
                 <Navbar />
                 <main className="flex-grow pt-20">
                   <NewsPage />
+                </main>
+                <Footer />
+              </>
+            }
+          />
+          <Route
+            path="/news/:id"
+            element={
+              <>
+                <Navbar />
+                <main className="flex-grow pt-20">
+                  <NewsDetailPage />
                 </main>
                 <Footer />
               </>
