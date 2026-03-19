@@ -155,8 +155,23 @@ export default function AdminSettings() {
 
     setUploading(true)
     try {
-      const imageUrl = URL.createObjectURL(file)
-      setCompanyForm({ ...companyForm, logo_url: imageUrl })
+      // 上传到 Supabase Storage
+      const fileName = `logo_${Date.now()}_${file.name}`
+      const { data: uploadData, error: uploadError } = await supabase.storage
+        .from('Tenant-dinga3a6b534e09b1264ffe93478753d9884')
+        .upload(`public/${fileName}`, file, {
+          cacheControl: '3600',
+          upsert: false,
+        })
+
+      if (uploadError) throw uploadError
+
+      // 获取公开访问 URL
+      const { data: urlData } = supabase.storage
+        .from('Tenant-dinga3a6b534e09b1264ffe93478753d9884')
+        .getPublicUrl(`public/${fileName}`)
+
+      setCompanyForm({ ...companyForm, logo_url: urlData.publicUrl })
     } catch (error) {
       console.error('Error uploading logo:', error)
       alert('图片上传失败')
