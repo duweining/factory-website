@@ -146,7 +146,7 @@ export default function AdminProducts() {
   }
 
   const removeImage = (index: number) => {
-    const images = formData.images as string[]
+    const images = (formData.images as string[]) || []
     setFormData({
       ...formData,
       images: images.filter((_, i) => i !== index),
