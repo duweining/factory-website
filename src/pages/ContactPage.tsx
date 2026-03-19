@@ -1,4 +1,4 @@
-import { MapPin, Phone, Mail, Clock, Globe, Fax } from 'lucide-react'
+import { MapPin, Phone, Mail, Clock, Globe } from 'lucide-react'
 import { useCompany } from '@/hooks/useCompany'
 
 export default function ContactPage() {
