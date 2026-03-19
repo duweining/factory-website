@@ -85,6 +85,10 @@ export default function NewsDetailPage() {
     })
   }
 
+  const displayDate = (newsItem: NewsS8B8A8A895Row) => {
+    return formatDate(newsItem.published_at || newsItem.created_at)
+  }
+
   return (
     <div className="animate-fade-in">
       {/* Header */}
