@@ -1,4 +1,4 @@
-import { MapPin, Phone, Mail, Clock, Globe } from 'lucide-react'
+import { MapPin, Phone, Mail, Clock, Globe, User, Wechat, MessageCircle, Fax } from 'lucide-react'
 import { useCompany } from '@/hooks/useCompany'
 import SeoProvider from '@/components/SeoProvider'
 
@@ -8,6 +8,16 @@ function ContactPageContent() {
   if (loading) {
     return <div className="min-h-screen flex items-center justify-center">加载中...</div>
   }
+
+  // 收集所有联系电话
+  const contactPhones = [
+    company?.phone,
+    company?.contact_phone1,
+    company?.contact_phone2,
+    company?.contact_phone3,
+    company?.contact_phone4,
+    company?.contact_phone5,
+  ].filter(Boolean)
 
   return (
     <div className="animate-fade-in">
@@ -36,22 +46,39 @@ function ContactPageContent() {
               </div>
             )}
 
-            {/* Phone */}
-            {company?.phone && (
+            {/* Contact Person */}
+            {company?.contact_person && (
               <div className="bg-white p-8 rounded-xl shadow-md hover-lift">
-                <div className="w-14 h-14 bg-primary-100 rounded-full flex items-center justify-center mb-6">
-                  <Phone className="w-7 h-7 text-primary-600" />
+                <div className="w-14 h-14 bg-blue-100 rounded-full flex items-center justify-center mb-6">
+                  <User className="w-7 h-7 text-blue-600" />
+                </div>
+                <h3 className="text-xl font-bold text-gray-900 mb-3">联系人</h3>
+                <p className="text-gray-600 leading-relaxed">{company.contact_person}</p>
+              </div>
+            )}
+
+            {/* Phone Numbers */}
+            {contactPhones.length > 0 && (
+              <div className="bg-white p-8 rounded-xl shadow-md hover-lift">
+                <div className="w-14 h-14 bg-green-100 rounded-full flex items-center justify-center mb-6">
+                  <Phone className="w-7 h-7 text-green-600" />
                 </div>
                 <h3 className="text-xl font-bold text-gray-900 mb-3">联系电话</h3>
-                <p className="text-gray-600 leading-relaxed">{company.phone}</p>
+                <div className="space-y-2">
+                  {contactPhones.map((phone, index) => (
+                    <p key={index} className="text-gray-600 leading-relaxed">
+                      {phone}
+                    </p>
+                  ))}
+                </div>
               </div>
             )}
 
             {/* Email */}
             {company?.email && (
               <div className="bg-white p-8 rounded-xl shadow-md hover-lift">
-                <div className="w-14 h-14 bg-primary-100 rounded-full flex items-center justify-center mb-6">
-                  <Mail className="w-7 h-7 text-primary-600" />
+                <div className="w-14 h-14 bg-purple-100 rounded-full flex items-center justify-center mb-6">
+                  <Mail className="w-7 h-7 text-purple-600" />
                 </div>
                 <h3 className="text-xl font-bold text-gray-900 mb-3">电子邮箱</h3>
                 <p className="text-gray-600 leading-relaxed">{company.email}</p>
@@ -61,21 +88,56 @@ function ContactPageContent() {
             {/* Website */}
             {company?.website && (
               <div className="bg-white p-8 rounded-xl shadow-md hover-lift">
-                <div className="w-14 h-14 bg-primary-100 rounded-full flex items-center justify-center mb-6">
-                  <Globe className="w-7 h-7 text-primary-600" />
+                <div className="w-14 h-14 bg-indigo-100 rounded-full flex items-center justify-center mb-6">
+                  <Globe className="w-7 h-7 text-indigo-600" />
                 </div>
                 <h3 className="text-xl font-bold text-gray-900 mb-3">官方网站</h3>
                 <p className="text-gray-600 leading-relaxed">{company.website}</p>
               </div>
             )}
 
+            {/* WeChat */}
+            {company?.wechat && (
+              <div className="bg-white p-8 rounded-xl shadow-md hover-lift">
+                <div className="w-14 h-14 bg-emerald-100 rounded-full flex items-center justify-center mb-6">
+                  <Wechat className="w-7 h-7 text-emerald-600" />
+                </div>
+                <h3 className="text-xl font-bold text-gray-900 mb-3">微信</h3>
+                <p className="text-gray-600 leading-relaxed">{company.wechat}</p>
+              </div>
+            )}
+
+            {/* QQ */}
+            {company?.qq && (
+              <div className="bg-white p-8 rounded-xl shadow-md hover-lift">
+                <div className="w-14 h-14 bg-blue-100 rounded-full flex items-center justify-center mb-6">
+                  <MessageCircle className="w-7 h-7 text-blue-500" />
+                </div>
+                <h3 className="text-xl font-bold text-gray-900 mb-3">QQ</h3>
+                <p className="text-gray-600 leading-relaxed">{company.qq}</p>
+              </div>
+            )}
+
+            {/* Fax */}
+            {company?.fax && (
+              <div className="bg-white p-8 rounded-xl shadow-md hover-lift">
+                <div className="w-14 h-14 bg-gray-100 rounded-full flex items-center justify-center mb-6">
+                  <Fax className="w-7 h-7 text-gray-600" />
+                </div>
+                <h3 className="text-xl font-bold text-gray-900 mb-3">传真</h3>
+                <p className="text-gray-600 leading-relaxed">{company.fax}</p>
+              </div>
+            )}
+
             {/* Working Hours */}
             <div className="bg-white p-8 rounded-xl shadow-md hover-lift">
-              <div className="w-14 h-14 bg-primary-100 rounded-full flex items-center justify-center mb-6">
-                <Clock className="w-7 h-7 text-primary-600" />
+              <div className="w-14 h-14 bg-orange-100 rounded-full flex items-center justify-center mb-6">
+                <Clock className="w-7 h-7 text-orange-600" />
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-3">工作时间</h3>
-              <p className="text-gray-600 leading-relaxed">周一至周五 9:00 - 18:00</p>
+              <h3 className="text-xl font-bold text-gray-900 mb-3">营业时间</h3>
+              <p className="text-gray-600 leading-relaxed">
+                {company?.business_hours || '周一至周五 9:00 - 18:00'}
+              </p>
             </div>
           </div>
 
