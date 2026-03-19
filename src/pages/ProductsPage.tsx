@@ -177,3 +177,11 @@ function ProductCard({ product }: { product: ProductsS8B8A8A895Row }) {
     </Link>
   )
 }
+
+export default function ProductsPage() {
+  return (
+    <SeoProvider pageType="products">
+      <ProductsPageContent />
+    </SeoProvider>
+  )
+}
