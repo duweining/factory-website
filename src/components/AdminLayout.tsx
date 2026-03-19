@@ -11,6 +11,7 @@ import {
   Users,
   Home,
   Search,
+  FileText,
 } from 'lucide-react'
 
 interface AdminUser {
