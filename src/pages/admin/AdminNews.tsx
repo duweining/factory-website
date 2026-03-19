@@ -18,6 +18,7 @@ export default function AdminNews() {
     cover_image: '',
     view_count: 0,
     is_featured: false,
+    published_at: new Date().toISOString(),
   })
   const [uploading, setUploading] = useState(false)
 
