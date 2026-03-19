@@ -263,9 +263,9 @@ function RelatedProducts({ currentProductId, category }: { currentProductId: num
             >
               <div className="bg-white rounded-xl overflow-hidden shadow-sm card-hover">
                 <div className="aspect-w-4 aspect-h-3 bg-gray-200 relative overflow-hidden">
-                  {(product.images as string[])?.[0] ? (
+                  {product.images?.[0] ? (
                     <img
-                      src={(product.images as string[])[0]}
+                      src={product.images[0]}
                       alt={product.name}
                       className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-300"
                     />
