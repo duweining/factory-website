@@ -9,6 +9,7 @@ import {
   Menu,
   X,
   Users,
+  Home,
 } from 'lucide-react'
 
 interface AdminUser {
