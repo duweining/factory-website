@@ -20,6 +20,7 @@ export default function Navbar() {
   const navLinks = [
     { path: '/', label: '首页' },
     { path: '/products', label: '产品中心' },
+    { path: '/cases', label: '客户案例' },
     { path: '/news', label: '新闻中心' },
     { path: '/contact', label: '联系我们' },
   ]
