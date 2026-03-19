@@ -104,6 +104,7 @@ export default function ProductDetailPage() {
                       className="w-full h-[500px] object-cover"
                       onError={(e) => {
                         console.error('Product image failed to load:', images[currentImageIndex])
+                        e.currentTarget.src = ''
                       }}
                     />
                     {images.length > 1 && (
