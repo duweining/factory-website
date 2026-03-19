@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
-import { Calendar, User } from 'lucide-react'
+import { Calendar, User, ChevronRight } from 'lucide-react'
+import { Link } from 'react-router-dom'
 import { NewsS8B8A8A895Row } from '@/types/database'
 import { supabase } from '@/lib/supabase'
 
@@ -116,53 +117,59 @@ function NewsCard({ news }: { news: NewsS8B8A8A895Row }) {
   }
 
   return (
-    <article className="bg-white rounded-xl overflow-hidden shadow-sm card-hover group">
-      <div className="aspect-w-16 aspect-h-9 bg-gray-200 relative overflow-hidden">
-        {news.cover_image ? (
-          <img
-            src={news.cover_image}
-            alt={news.title}
-            className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-300"
-          />
-        ) : (
-          <div className="absolute inset-0 bg-gradient-to-br from-primary-100 to-primary-200" />
-        )}
-        {news.is_featured && (
-          <div className="absolute top-4 right-4 bg-red-500 text-white px-3 py-1 rounded-full text-sm font-medium">
-            头条
-          </div>
-        )}
-        {news.category && (
-          <div className="absolute top-4 left-4 bg-primary-600 text-white px-3 py-1 rounded-full text-sm font-medium">
-            {news.category}
-          </div>
-        )}
-      </div>
-      <div className="p-6">
-        <h3 className="text-xl font-bold text-gray-900 mb-3 line-clamp-2 group-hover:text-primary-600 transition-colors">
-          {news.title}
-        </h3>
-        <p className="text-gray-600 mb-4 line-clamp-3">
-          {news.summary || news.content.substring(0, 100) + '...'}
-        </p>
-        <div className="flex items-center justify-between text-sm text-gray-500">
-          <div className="flex items-center space-x-4">
-            {news.author && (
-              <div className="flex items-center">
-                <User className="w-4 h-4 mr-1" />
-                {news.author}
-              </div>
-            )}
-            <div className="flex items-center">
-              <Calendar className="w-4 h-4 mr-1" />
-              {formatDate(news.created_at)}
+    <Link to={`/news/${news.id}`} className="block group">
+      <article className="bg-white rounded-xl overflow-hidden shadow-sm card-hover">
+        <div className="aspect-w-16 aspect-h-9 bg-gray-200 relative overflow-hidden">
+          {news.cover_image ? (
+            <img
+              src={news.cover_image}
+              alt={news.title}
+              className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-300"
+            />
+          ) : (
+            <div className="absolute inset-0 bg-gradient-to-br from-primary-100 to-primary-200" />
+          )}
+          {news.is_featured && (
+            <div className="absolute top-4 right-4 bg-red-500 text-white px-3 py-1 rounded-full text-sm font-medium">
+              头条
             </div>
-          </div>
-          {news.view_count !== null && news.view_count > 0 && (
-            <span>{news.view_count} 阅读</span>
+          )}
+          {news.category && (
+            <div className="absolute top-4 left-4 bg-primary-600 text-white px-3 py-1 rounded-full text-sm font-medium">
+              {news.category}
+            </div>
           )}
         </div>
-      </div>
-    </article>
+        <div className="p-6">
+          <h3 className="text-xl font-bold text-gray-900 mb-3 line-clamp-2 group-hover:text-primary-600 transition-colors">
+            {news.title}
+          </h3>
+          <p className="text-gray-600 mb-4 line-clamp-3">
+            {news.summary || news.content.substring(0, 100) + '...'}
+          </p>
+          <div className="flex items-center justify-between text-sm text-gray-500">
+            <div className="flex items-center space-x-4">
+              {news.author && (
+                <div className="flex items-center">
+                  <User className="w-4 h-4 mr-1" />
+                  {news.author}
+                </div>
+              )}
+              <div className="flex items-center">
+                <Calendar className="w-4 h-4 mr-1" />
+                {formatDate(news.created_at)}
+              </div>
+            </div>
+            {news.view_count !== null && news.view_count > 0 && (
+              <span>{news.view_count} 阅读</span>
+            )}
+          </div>
+          <div className="mt-4 flex items-center text-primary-600 font-medium">
+            阅读更多
+            <ChevronRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
+          </div>
+        </div>
+      </article>
+    </Link>
   )
 }
