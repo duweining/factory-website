@@ -79,9 +79,10 @@ export default function CasesPage() {
                     className="bg-white rounded-xl shadow-md overflow-hidden hover-lift group"
                   >
                     <div className="relative overflow-hidden">
-                      <img
+                      <WatermarkImage
                         src={caseItem.image_url}
                         alt={caseItem.title}
+                        logoUrl={company?.logo_url}
                         className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-105"
                         onError={(e) => {
                           const target = e.target as HTMLImageElement
