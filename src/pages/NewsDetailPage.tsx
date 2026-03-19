@@ -265,6 +265,5 @@ function RelatedNews({ currentNewsId, category }: { currentNewsId: number; categ
         </div>
       </div>
     </section>
-    )
-  }
+  )
 }
