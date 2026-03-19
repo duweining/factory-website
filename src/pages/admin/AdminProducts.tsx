@@ -307,7 +307,7 @@ export default function AdminProducts() {
                   </label>
                   <input
                     type="text"
-                    value={formData.category}
+                    value={formData.category || ''}
                     onChange={(e) =>
                       setFormData({ ...formData, category: e.target.value })
                     }
