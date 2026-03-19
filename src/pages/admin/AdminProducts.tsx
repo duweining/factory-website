@@ -374,7 +374,7 @@ export default function AdminProducts() {
                       点击上传图片或拖拽到此处
                     </p>
                     <p className="text-xs text-gray-500 mt-1">
-                      已上传 {(formData.images as string[])?.length || 0}/5 张
+                      已上传 {((formData.images as string[]) || []).length}/5 张
                     </p>
                   </label>
                 </div>
