@@ -408,7 +408,7 @@ export default function AdminProducts() {
                   </label>
                   <input
                     type="number"
-                    value={formData.sort_order}
+                    value={formData.sort_order || 0}
                     onChange={(e) =>
                       setFormData({
                         ...formData,
