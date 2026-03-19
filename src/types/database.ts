@@ -79,7 +79,7 @@ export interface ProductsS8B8A8A895Row {
   description: string | null;
   category: string | null;
   price: number | null;
-  images: Record<string, unknown> | null;
+  images: string[] | null;
   sort_order: number | null;
   is_featured: boolean | null;
   is_deleted: string | null;
