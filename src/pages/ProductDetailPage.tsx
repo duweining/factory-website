@@ -19,6 +19,7 @@ export default function ProductDetailPage() {
 
   async function fetchProduct(productId: number) {
     try {
+      console.log('Fetching product:', productId)
       const { data, error } = await supabase
         .from('products_s_8b8a8a89_5')
         .select('*')
@@ -26,7 +27,11 @@ export default function ProductDetailPage() {
         .eq('is_deleted', 'n')
         .single()
 
-      if (error) throw error
+      if (error) {
+        console.error('Error fetching product:', error)
+        throw error
+      }
+      console.log('Fetched product:', data)
       setProduct(data)
     } catch (error) {
       console.error('Error fetching product:', error)
