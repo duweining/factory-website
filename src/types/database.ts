@@ -28,7 +28,7 @@ export interface AutoNewsConfigRow {
   created_at: string | null;
   updated_at: string | null;
 }
-export type AutoNewsConfigInsert = Omit<AutoNewsConfigRow, 'id', 'corp_id', 'emp_id', 'is_deleted', 'created_at', 'updated_at'>;
+export type AutoNewsConfigInsert = Omit<AutoNewsConfigRow, 'id' | 'corp_id' | 'emp_id' | 'is_deleted' | 'created_at' | 'updated_at'>;
 export type AutoNewsConfigUpdate = Partial<AutoNewsConfigInsert>;
 
 export interface CasesS8B8A8A895Row {
