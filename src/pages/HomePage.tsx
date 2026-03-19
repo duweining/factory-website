@@ -216,8 +216,10 @@ export default function HomePage() {
 }
 
 function ProductCard({ product }: { product: ProductsS8B8A8A895Row }) {
-  const images = (product.images as string[]) || []
+  const images = (product.images as string[] | null) || []
   const mainImage = images[0]
+
+  console.log('ProductCard rendering for:', product.name, 'with images:', images)
 
   return (
     <Link to={`/products/${product.id}`} className="block group">
@@ -228,6 +230,10 @@ function ProductCard({ product }: { product: ProductsS8B8A8A895Row }) {
               src={mainImage}
               alt={product.name}
               className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-300"
+              onError={(e) => {
+                console.error('Image failed to load:', mainImage)
+                e.currentTarget.src = ''
+              }}
             />
           ) : (
             <div className="absolute inset-0 bg-gradient-to-br from-primary-100 to-primary-200" />
