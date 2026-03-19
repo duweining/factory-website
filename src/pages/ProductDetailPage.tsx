@@ -102,6 +102,9 @@ export default function ProductDetailPage() {
                       src={images[currentImageIndex]}
                       alt={`${product.name} - ${currentImageIndex + 1}`}
                       className="w-full h-[500px] object-cover"
+                      onError={(e) => {
+                        console.error('Product image failed to load:', images[currentImageIndex])
+                      }}
                     />
                     {images.length > 1 && (
                       <>
