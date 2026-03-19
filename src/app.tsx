@@ -15,7 +15,6 @@ import AdminNews from './pages/admin/AdminNews'
 import AdminSettings from './pages/admin/AdminSettings'
 import AdminCases from './pages/admin/AdminCases'
 import AdminSeo from './pages/admin/AdminSeo'
-import AdminLayout from './components/AdminLayout'
 
 export default function App() {
   return (
