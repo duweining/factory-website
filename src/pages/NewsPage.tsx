@@ -67,27 +67,32 @@ function NewsPageContent() {
   }, [products, cases])
 
   function generateRandomImages() {
-    const allImages: string[] = []
+    const imageSet = new Set<string>()
     
     // Extract product images
     products.forEach((product) => {
-      const images = (product.images as string[] | null) || []
-      images.forEach((img) => {
-        if (img && !allImages.includes(img)) {
-          allImages.push(img)
-        }
-      })
+      const images = (product.images as Record<string, unknown> | null) || []
+      if (Array.isArray(images)) {
+        images.forEach((img) => {
+          if (img && typeof img === 'string') {
+            imageSet.add(img)
+          }
+        })
+      }
     })
 
     // Extract case images
     cases.forEach((caseItem) => {
-      if (caseItem.image_url && !allImages.includes(caseItem.image_url)) {
-        allImages.push(caseItem.image_url)
+      if (caseItem.image_url) {
+        imageSet.add(caseItem.image_url)
       }
     })
 
-    // Shuffle and pick 6 images
+    // Convert to array and shuffle
+    const allImages = Array.from(imageSet)
     const shuffled = allImages.sort(() => Math.random() - 0.5)
+    
+    // Pick 6 unique images
     setRandomImages(shuffled.slice(0, 6))
   }
 
