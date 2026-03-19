@@ -140,9 +140,10 @@ export default function ProductDetailPage() {
                               : 'border-gray-200 hover:border-gray-300'
                           }`}
                         >
-                          <img
+                          <WatermarkImage
                             src={img}
                             alt={`Thumbnail ${index + 1}`}
+                            logoUrl={company?.logo_url}
                             className="w-full h-full object-cover"
                           />
                         </button>
