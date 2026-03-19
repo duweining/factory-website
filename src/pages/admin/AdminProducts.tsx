@@ -125,6 +125,8 @@ export default function AdminProducts() {
     const fileName = `${Date.now()}-${Math.random().toString(36).substring(2)}.${fileExt}`
     const filePath = `products/${fileName}`
 
+    console.log('Uploading file:', fileName, 'to path:', filePath)
+
     const { error } = await supabase.storage
       .from(BUCKET_NAME)
       .upload(filePath, file, {
@@ -141,6 +143,7 @@ export default function AdminProducts() {
       .from(BUCKET_NAME)
       .getPublicUrl(filePath)
 
+    console.log('Uploaded successfully, public URL:', urlData?.publicUrl)
     return urlData?.publicUrl || null
   }
 
