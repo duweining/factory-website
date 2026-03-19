@@ -107,6 +107,9 @@ export default function NewsDetailPage() {
                   src={news.cover_image}
                   alt={news.title}
                   className="w-full h-[400px] object-cover"
+                  onError={(e) => {
+                    console.error('News cover image failed to load:', news.cover_image)
+                  }}
                 />
               </div>
             )}
