@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useParams, Link, useNavigate } from 'react-router-dom'
-import { ChevronLeft, ChevronRight, ChevronLeftCircle, ChevronRightCircle } from 'lucide-react'
+import { ChevronLeft, ChevronLeftCircle, ChevronRightCircle } from 'lucide-react'
 import { ProductsS8B8A8A895Row } from '@/types/database'
 import { supabase } from '@/lib/supabase'
 
