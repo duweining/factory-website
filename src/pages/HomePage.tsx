@@ -10,6 +10,7 @@ export default function HomePage() {
   const { company, loading: companyLoading } = useCompany()
   const [featuredProducts, setFeaturedProducts] = useState<ProductsS8B8A8A895Row[]>([])
   const [productsLoading, setProductsLoading] = useState(true)
+  const [showAllProducts, setShowAllProducts] = useState(false)
 
   useEffect(() => {
     fetchFeaturedProducts()
