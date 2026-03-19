@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import AdminLayout from '@/components/AdminLayout'
-import { Building, Key, Save, Phone, Mail, Globe, User, Clock, Wechat, MessageCircle, Fax } from 'lucide-react'
+import { Building, Key, Save, Phone, User, Clock, MessageSquare, Mail, Globe } from 'lucide-react'
 import { CompaniesS8B8A8A895Row, CompaniesS8B8A8A895Insert } from '@/types/database'
 import { supabase } from '@/lib/supabase'
 
