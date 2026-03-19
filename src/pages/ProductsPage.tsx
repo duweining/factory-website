@@ -128,15 +128,17 @@ export default function ProductsPage() {
 function ProductCard({ product }: { product: ProductsS8B8A8A895Row }) {
   const images = (product.images as string[] | null) || []
   const mainImage = images[0]
+  const { company } = useCompany()
 
   return (
     <Link to={`/products/${product.id}`} className="block group">
       <div className="bg-white rounded-xl overflow-hidden shadow-sm card-hover">
         <div className="aspect-w-4 aspect-h-3 bg-gray-200 relative overflow-hidden">
           {mainImage ? (
-            <img
+            <WatermarkImage
               src={mainImage}
               alt={product.name}
+              logoUrl={company?.logo_url}
               className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-300"
             />
           ) : (
