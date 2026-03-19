@@ -290,7 +290,7 @@ export default function AdminNews() {
                   </label>
                   <input
                     type="text"
-                    value={formData.category}
+                    value={formData.category || ''}
                     onChange={(e) =>
                       setFormData({ ...formData, category: e.target.value })
                     }
@@ -303,7 +303,7 @@ export default function AdminNews() {
                   </label>
                   <input
                     type="text"
-                    value={formData.author}
+                    value={formData.author || ''}
                     onChange={(e) =>
                       setFormData({ ...formData, author: e.target.value })
                     }
