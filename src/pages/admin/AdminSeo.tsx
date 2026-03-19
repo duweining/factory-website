@@ -61,7 +61,8 @@ export default function AdminSeo() {
   }
 
   return (
-    <div className="max-w-4xl">
+    <AdminLayout>
+      <div className="max-w-4xl">
       <div className="mb-8">
         <h1 className="text-3xl font-bold text-gray-900 mb-2">SEO 优化设置</h1>
         <p className="text-gray-600">为各个页面设置标题、关键词和描述，提升搜索引擎排名</p>
