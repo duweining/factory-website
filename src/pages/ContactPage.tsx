@@ -95,13 +95,6 @@ export default function ContactPage() {
               </div>
             </div>
           )}
-
-          {/* Map Placeholder */}
-          <div className="mt-16 h-80 bg-gray-200 rounded-2xl overflow-hidden shadow-lg">
-            <div className="w-full h-full bg-gradient-to-br from-primary-100 to-primary-200 flex items-center justify-center">
-              <p className="text-gray-500 text-lg">地图加载中...</p>
-            </div>
-          </div>
         </div>
       </section>
     </div>
