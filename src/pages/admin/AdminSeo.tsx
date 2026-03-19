@@ -189,5 +189,6 @@ export default function AdminSeo() {
         </ul>
       </div>
     </div>
+    </AdminLayout>
   )
 }
