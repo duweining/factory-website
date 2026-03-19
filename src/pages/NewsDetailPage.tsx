@@ -139,7 +139,7 @@ export default function NewsDetailPage() {
                 )}
                 <div className="flex items-center text-gray-500 text-sm">
                   <Calendar className="w-4 h-4 mr-1" />
-                  {formatDate(news.created_at)}
+                  {displayDate(news)}
                 </div>
                 {news.author && (
                   <div className="flex items-center text-gray-500 text-sm">
