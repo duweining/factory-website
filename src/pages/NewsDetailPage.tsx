@@ -273,7 +273,7 @@ function RelatedNews({ currentNewsId, category }: { currentNewsId: number; categ
                     {item.title}
                   </h3>
                   <p className="text-sm text-gray-500">
-                    {formatDate(item.published_at || item.created_at)}
+                    {displayDate(item)}
                   </p>
                 </div>
               </article>
