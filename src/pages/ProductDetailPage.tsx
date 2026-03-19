@@ -101,9 +101,10 @@ export default function ProductDetailPage() {
               {images.length > 0 ? (
                 <div className="space-y-4">
                   <div className="relative aspect-w-4 aspect-h-3 bg-gray-100 rounded-xl overflow-hidden">
-                    <img
+                    <WatermarkImage
                       src={images[currentImageIndex]}
                       alt={`${product.name} - ${currentImageIndex + 1}`}
+                      logoUrl={company?.logo_url}
                       className="w-full h-[500px] object-cover"
                       onError={(e) => {
                         console.error('Product image failed to load:', images[currentImageIndex])
