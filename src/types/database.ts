@@ -12,7 +12,7 @@ export interface AdminUsersRow {
   created_at: string | null;
   updated_at: string | null;
 }
-export type AdminUsersInsert = Omit<AdminUsersRow, 'id', 'corp_id', 'emp_id', 'is_deleted', 'created_at', 'updated_at'>;
+export type AdminUsersInsert = Omit<AdminUsersRow, 'id' | 'corp_id' | 'emp_id' | 'is_deleted' | 'created_at' | 'updated_at'>;
 export type AdminUsersUpdate = Partial<AdminUsersInsert>;
 
 export interface CompaniesS8B8A8A895Row {
