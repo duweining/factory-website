@@ -220,7 +220,7 @@ function ProductCard({ product }: { product: ProductsS8B8A8A895Row }) {
   const { company } = useCompany()
   const images = (product.images as string[] | null) || []
   const mainImage = images[0]
-  const logoUrl = company?.logo
+  const logoUrl = company?.logo_url
 
   console.log('ProductCard rendering for:', product.name, 'with images:', images)
 
