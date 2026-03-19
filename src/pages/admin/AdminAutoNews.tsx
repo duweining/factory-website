@@ -215,7 +215,7 @@ export default function AdminAutoNews() {
       if (error) {
         console.error('RPC error:', error)
         // 检查是否是权限错误
-        if (error.code === '42501' || error.status === 403) {
+        if (error.code === '42501') {
           throw new Error('您没有权限执行此操作，请联系管理员')
         }
         throw error
