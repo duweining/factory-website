@@ -273,15 +273,7 @@ function RelatedNews({ currentNewsId, category }: { currentNewsId: number; categ
                     {item.title}
                   </h3>
                   <p className="text-sm text-gray-500">
-                    {new Date(item.created_at || '').toLocaleDateString('zh-CN', {
-                      year: 'numeric',
-                      month: 'long',
-                      day: 'numeric',
-                      hour: '2-digit',
-                      minute: '2-digit',
-                      second: '2-digit',
-                      hour12: false,
-                    })}
+                    {formatDate(item.published_at || item.created_at)}
                   </p>
                 </div>
               </article>
