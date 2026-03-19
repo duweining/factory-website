@@ -75,7 +75,7 @@ export interface CompaniesS8B8A8A895Row {
   fax: string | null;
   business_hours: string | null;
 }
-export type CompaniesS8B8A8A895Insert = Omit<CompaniesS8B8A8A895Row, 'id', 'corp_id', 'emp_id', 'is_deleted', 'created_at', 'updated_at'>;
+export type CompaniesS8B8A8A895Insert = Omit<CompaniesS8B8A8A895Row, 'id' | 'corp_id' | 'emp_id' | 'is_deleted' | 'created_at' | 'updated_at'>;
 export type CompaniesS8B8A8A895Update = Partial<CompaniesS8B8A8A895Insert>;
 
 export interface NewsS8B8A8A895Row {
