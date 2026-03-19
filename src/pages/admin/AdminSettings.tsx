@@ -453,7 +453,7 @@ export default function AdminSettings() {
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2 flex items-center">
-                      <Wechat className="w-4 h-4 mr-2 text-green-600" />
+                      <MessageSquare className="w-4 h-4 mr-2 text-green-600" />
                       微信
                     </label>
                     <input
