@@ -135,7 +135,7 @@ export default function AdminProducts() {
       const newImages = Array.from(files).map((file) => URL.createObjectURL(file))
       setFormData({
         ...formData,
-        images: [...currentImages, ...newImages],
+        images: [...(formData.images as string[]), ...newImages],
       })
     } catch (error) {
       console.error('Error uploading image:', error)
