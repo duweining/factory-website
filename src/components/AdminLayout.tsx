@@ -43,6 +43,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     { name: '产品管理', href: '/admin/products', icon: Package },
     { name: '客户案例', href: '/admin/cases', icon: Users },
     { name: '新闻管理', href: '/admin/news', icon: Newspaper },
+    { name: 'SEO 优化', href: '/admin/seo', icon: Search },
     { name: '企业设置', href: '/admin/settings', icon: Settings },
   ]
 
