@@ -14,7 +14,7 @@ export default function AdminProducts() {
     description: '',
     category: '',
     price: undefined,
-    images: [],
+    images: [] as string[],
     sort_order: 0,
     is_featured: false,
   })
