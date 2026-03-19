@@ -39,6 +39,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   const navigation = [
     { name: '控制台', href: '/admin/dashboard', icon: LayoutDashboard },
     { name: '产品管理', href: '/admin/products', icon: Package },
+    { name: '客户案例', href: '/admin/cases', icon: Users },
     { name: '新闻管理', href: '/admin/news', icon: Newspaper },
     { name: '企业设置', href: '/admin/settings', icon: Settings },
   ]
