@@ -62,19 +62,16 @@ export default function WatermarkImage({
         
         const dataUrl = canvas.toDataURL('image/jpeg', 0.9)
         setWatermarkedSrc(dataUrl)
-        setImageLoaded(true)
       }
       
       logoImage.onerror = () => {
         setWatermarkedSrc(src)
-        setImageLoaded(true)
       }
       
       logoImage.src = logoUrl
     }
     
     mainImage.onerror = () => {
-      setImageLoaded(true)
       if (onError) {
         onError?.({ target: { src } } as any)
       }
