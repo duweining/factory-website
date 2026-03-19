@@ -11,11 +11,11 @@ export default function AdminProducts() {
   const [loading, setLoading] = useState(true)
   const [showModal, setShowModal] = useState(false)
   const [editingProduct, setEditingProduct] = useState<ProductsS8B8A8A895Row | null>(null)
-  const [formData, setFormData] = useState<Partial<ProductsS8B8A8A895Insert>>({
+  const [formData, setFormData] = useState({
     name: '',
     description: '',
     category: '',
-    price: undefined,
+    price: undefined as number | undefined,
     images: [] as string[],
     sort_order: 0,
     is_featured: false,
