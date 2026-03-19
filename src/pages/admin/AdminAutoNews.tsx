@@ -170,7 +170,7 @@ export default function AdminAutoNews() {
             const { error: rpcError } = await supabase.rpc('generate_auto_news')
             if (rpcError) {
               console.error('RPC error:', rpcError)
-              if (rpcError.code === '42501' || rpcError.status === 403) {
+              if (rpcError.code === '42501') {
                 setMessage({ type: 'error', text: '您没有权限执行生成操作，请联系管理员' })
               }
             } else {
