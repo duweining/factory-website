@@ -180,6 +180,9 @@ export default function AdminNews() {
                 作者
               </th>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+                发布时间
+              </th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
                 推荐
               </th>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
