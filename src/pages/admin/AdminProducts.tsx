@@ -122,7 +122,7 @@ export default function AdminProducts() {
     if (!files || files.length === 0) return
 
     // 检查图片数量限制
-    const currentImages = formData.images as string[] || []
+    const currentImages = (formData.images as string[]) || []
     if (currentImages.length + files.length > 5) {
       alert('最多只能上传 5 张图片')
       return
