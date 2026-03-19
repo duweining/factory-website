@@ -3,12 +3,6 @@ import AdminLayout from '@/components/AdminLayout'
 import { FileText, CheckCircle, AlertCircle, Loader } from 'lucide-react'
 import { supabase } from '@/lib/supabase'
 
-interface NewsTemplate {
-  title: string
-  keywords: string[]
-  baseContent: string
-}
-
 // 生成更多标题的模板函数
 function generateNewsTitle(index: number): string {
   const prefixes = [
