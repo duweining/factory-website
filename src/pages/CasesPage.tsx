@@ -36,8 +36,8 @@ export default function CasesPage() {
   }
 
   function distributeCasesToColumns() {
-    const newColumns: CasesS8B8A8A895Row[][] = [[], [], []]
-    const columnHeights = [0, 0, 0]
+    const newColumns: CasesS8B8A8A895Row[][] = [[], [], [], []]
+    const columnHeights = [0, 0, 0, 0]
 
     cases.forEach((caseItem) => {
       const minHeightIndex = columnHeights.indexOf(Math.min(...columnHeights))
