@@ -339,7 +339,7 @@ export default function AdminProducts() {
                 </label>
                 <textarea
                   rows={4}
-                  value={formData.description}
+                  value={formData.description || ''}
                   onChange={(e) =>
                     setFormData({ ...formData, description: e.target.value })
                   }
