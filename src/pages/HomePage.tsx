@@ -26,7 +26,7 @@ export default function HomePage() {
         .eq('is_featured', true)
         .order('sort_order', { ascending: true })
         .order('created_at', { ascending: false })
-        .limit(6)
+        .limit(12)
 
       if (error) {
         console.error('Error fetching featured products:', error)
