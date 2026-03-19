@@ -106,7 +106,8 @@ export default function NewsPage() {
 }
 
 function NewsCard({ news }: { news: NewsS8B8A8A895Row }) {
-  const formatDate = (dateString: string) => {
+  const formatDate = (dateString: string | null) => {
+    if (!dateString) return ''
     return new Date(dateString).toLocaleDateString('zh-CN', {
       year: 'numeric',
       month: 'long',
