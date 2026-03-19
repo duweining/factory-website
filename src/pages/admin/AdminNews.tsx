@@ -32,7 +32,7 @@ export default function AdminNews() {
         .select('*')
         .eq('is_deleted', 'n')
         .order('is_featured', { ascending: false })
-        .order('created_at', { ascending: false })
+        .order('published_at', { ascending: false })
 
       if (error) throw error
       setNews(data || [])
