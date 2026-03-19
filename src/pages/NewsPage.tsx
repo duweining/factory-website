@@ -121,6 +121,10 @@ function NewsCard({ news }: { news: NewsS8B8A8A895Row }) {
     })
   }
 
+  const displayDate = (news: NewsS8B8A8A895Row) => {
+    return formatDate(news.published_at || news.created_at)
+  }
+
   return (
     <Link to={`/news/${news.id}`} className="block group">
       <article className="bg-white rounded-xl overflow-hidden shadow-sm card-hover">
