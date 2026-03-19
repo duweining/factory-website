@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
-import { Search } from 'lucide-react'
+import { Search, ChevronRight } from 'lucide-react'
+import { Link } from 'react-router-dom'
 import { ProductsS8B8A8A895Row } from '@/types/database'
 import { supabase } from '@/lib/supabase'
 
@@ -127,42 +128,47 @@ function ProductCard({ product }: { product: ProductsS8B8A8A895Row }) {
   const mainImage = images[0]
 
   return (
-    <div className="bg-white rounded-xl overflow-hidden shadow-sm card-hover group">
-      <div className="aspect-w-4 aspect-h-3 bg-gray-200 relative overflow-hidden">
-        {mainImage ? (
-          <img
-            src={mainImage}
-            alt={product.name}
-            className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-300"
-          />
-        ) : (
-          <div className="absolute inset-0 bg-gradient-to-br from-primary-100 to-primary-200" />
-        )}
-        {product.is_featured && (
-          <div className="absolute top-4 right-4 bg-yellow-500 text-white px-3 py-1 rounded-full text-sm font-medium">
-            推荐
+    <Link to={`/products/${product.id}`} className="block group">
+      <div className="bg-white rounded-xl overflow-hidden shadow-sm card-hover">
+        <div className="aspect-w-4 aspect-h-3 bg-gray-200 relative overflow-hidden">
+          {mainImage ? (
+            <img
+              src={mainImage}
+              alt={product.name}
+              className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-300"
+            />
+          ) : (
+            <div className="absolute inset-0 bg-gradient-to-br from-primary-100 to-primary-200" />
+          )}
+          {product.is_featured && (
+            <div className="absolute top-4 right-4 bg-yellow-500 text-white px-3 py-1 rounded-full text-sm font-medium">
+              推荐
+            </div>
+          )}
+        </div>
+        <div className="p-6">
+          {product.category && (
+            <span className="text-sm text-primary-600 font-medium mb-2 block">
+              {product.category}
+            </span>
+          )}
+          <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-primary-600 transition-colors">
+            {product.name}
+          </h3>
+          <p className="text-gray-600 mb-4 line-clamp-2">
+            {product.description || '暂无描述'}
+          </p>
+          {product.price && (
+            <div className="text-2xl font-bold text-primary-600 mb-4">
+              ¥{product.price.toLocaleString()}
+            </div>
+          )}
+          <div className="flex items-center text-primary-600 font-medium">
+            查看详情
+            <ChevronRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
           </div>
-        )}
+        </div>
       </div>
-      <div className="p-6">
-        {product.category && (
-          <span className="text-sm text-primary-600 font-medium mb-2 block">
-            {product.category}
-          </span>
-        )}
-        <h3 className="text-xl font-bold text-gray-900 mb-2">{product.name}</h3>
-        <p className="text-gray-600 mb-4 line-clamp-2">
-          {product.description || '暂无描述'}
-        </p>
-        {product.price && (
-          <div className="text-2xl font-bold text-primary-600 mb-4">
-            ¥{product.price.toLocaleString()}
-          </div>
-        )}
-        <button className="w-full py-3 bg-primary-600 text-white rounded-lg btn-glow font-medium">
-          查看详情
-        </button>
-      </div>
-    </div>
+    </Link>
   )
 }
