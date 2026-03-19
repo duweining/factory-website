@@ -99,6 +99,17 @@ function NewsPageContent() {
     ? news.filter((n) => n.category === selectedCategory)
     : news
 
+  const totalPages = Math.ceil(filteredNews.length / ITEMS_PER_PAGE)
+  const paginatedNews = filteredNews.slice(
+    (currentPage - 1) * ITEMS_PER_PAGE,
+    currentPage * ITEMS_PER_PAGE
+  )
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page)
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
+
   if (loading) {
     return <div className="min-h-screen flex items-center justify-center">加载中...</div>
   }
