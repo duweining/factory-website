@@ -139,8 +139,22 @@ export default function AdminAutoNews() {
       setIsEnabled(newState)
       setMessage({
         type: 'success',
-        text: newState ? '自动发布已启动！' : '自动发布已停止',
+        text: newState ? '自动发布已启动！系统将在每天早上 8 点自动生成新闻。' : '自动发布已停止',
       })
+      
+      // 立即检查并执行一次（如果已到时间）
+      if (newState) {
+        const { data: updatedData } = await supabase
+          .from('auto_news_config')
+          .select('*')
+          .eq('id', config.id)
+          .single()
+        
+        if (updatedData && updatedData.next_run_time && new Date(updatedData.next_run_time) <= new Date()) {
+          await supabase.rpc('generate_auto_news')
+        }
+      }
+      
       fetchConfig()
     } catch (error) {
       console.error('Error toggling:', error)
