@@ -85,10 +85,9 @@ export default function AdminAutoNews() {
         return
       }
 
-      let savedData
       if (config) {
         // 更新现有配置
-        const { data: updateData, error } = await supabase
+        const { error } = await supabase
           .from('auto_news_config')
           .update({
             keywords: keywordArray,
@@ -96,7 +95,6 @@ export default function AdminAutoNews() {
             updated_at: new Date().toISOString(),
           })
           .eq('id', config.id)
-          .select()
 
         if (error) {
           console.error('Update error:', error)
@@ -106,11 +104,10 @@ export default function AdminAutoNews() {
           throw error
         }
         
-        savedData = updateData
-        console.log('Update successful:', updateData)
+        console.log('Update successful')
       } else {
         // 插入新配置
-        const { data: insertData, error } = await supabase
+        const { error } = await supabase
           .from('auto_news_config')
           .insert([{
             keywords: keywordArray,
@@ -119,7 +116,6 @@ export default function AdminAutoNews() {
               ? new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString()
               : null,
           }])
-          .select()
 
         if (error) {
           console.error('Insert error:', error)
@@ -129,8 +125,7 @@ export default function AdminAutoNews() {
           throw error
         }
         
-        savedData = insertData
-        console.log('Insert successful:', insertData)
+        console.log('Insert successful')
       }
 
       // 立即刷新配置
