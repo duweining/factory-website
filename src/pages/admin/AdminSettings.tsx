@@ -61,6 +61,16 @@ export default function AdminSettings() {
           phone: data.phone || '',
           email: data.email || '',
           website: data.website || '',
+          contact_person: data.contact_person || '',
+          contact_phone1: data.contact_phone1 || '',
+          contact_phone2: data.contact_phone2 || '',
+          contact_phone3: data.contact_phone3 || '',
+          contact_phone4: data.contact_phone4 || '',
+          contact_phone5: data.contact_phone5 || '',
+          wechat: data.wechat || '',
+          qq: data.qq || '',
+          fax: data.fax || '',
+          business_hours: data.business_hours || '',
         })
       }
     } catch (error) {
