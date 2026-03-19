@@ -10,6 +10,7 @@ import {
   X,
   Users,
   Home,
+  Search,
 } from 'lucide-react'
 
 interface AdminUser {
