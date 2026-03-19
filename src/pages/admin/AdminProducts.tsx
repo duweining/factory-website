@@ -150,7 +150,7 @@ export default function AdminProducts() {
     setFormData({
       ...formData,
       images: images.filter((_, i) => i !== index),
-    })
+    } as Partial<ProductsS8B8A8A895Insert>)
   }
 
   if (loading) {
