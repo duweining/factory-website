@@ -378,7 +378,7 @@ export default function AdminNews() {
                   </label>
                   <input
                     type="number"
-                    value={formData.view_count}
+                    value={formData.view_count || 0}
                     onChange={(e) =>
                       setFormData({
                         ...formData,
@@ -392,7 +392,7 @@ export default function AdminNews() {
                   <label className="flex items-center space-x-3 cursor-pointer">
                     <input
                       type="checkbox"
-                      checked={formData.is_featured}
+                      checked={formData.is_featured || false}
                       onChange={(e) =>
                         setFormData({ ...formData, is_featured: e.target.checked })
                       }
