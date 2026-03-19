@@ -8,6 +8,7 @@ import {
   LogOut,
   Menu,
   X,
+  Users,
 } from 'lucide-react'
 
 interface AdminUser {
