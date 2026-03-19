@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { ChevronRight, Search } from 'lucide-react'
+import { Search } from 'lucide-react'
 import { ProductsS8B8A8A895Row } from '@/types/database'
 import { supabase } from '@/lib/supabase'
 
