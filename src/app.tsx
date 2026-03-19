@@ -111,6 +111,7 @@ export default function App() {
           <Route path="/admin/news" element={<AdminNews />} />
           <Route path="/admin/cases" element={<AdminCases />} />
           <Route path="/admin/settings" element={<AdminSettings />} />
+          <Route path="/admin/seo" element={<AdminSeo />} />
         </Routes>
       </div>
     </BrowserRouter>
