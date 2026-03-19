@@ -169,6 +169,9 @@ function NewsCard({ news }: { news: NewsS8B8A8A895Row }) {
             阅读更多
             <ChevronRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
           </div>
+        </div>
+      </article>
+    </Link>
   )
 }
 
