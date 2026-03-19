@@ -1,4 +1,4 @@
-import { ChevronRight, ArrowRight, CheckCircle } from 'lucide-react'
+import { ChevronRight, ArrowRight } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { useCompany } from '@/hooks/useCompany'
 
