@@ -7,7 +7,7 @@ import { supabase } from '@/lib/supabase'
 import WatermarkImage from '@/components/WatermarkImage'
 import SeoProvider from '@/components/SeoProvider'
 
-export default function HomePage() {
+function HomePageContent() {
   const { company, loading: companyLoading } = useCompany()
   const [featuredProducts, setFeaturedProducts] = useState<ProductsS8B8A8A895Row[]>([])
   const [productsLoading, setProductsLoading] = useState(true)
