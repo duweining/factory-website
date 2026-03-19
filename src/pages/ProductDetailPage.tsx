@@ -9,6 +9,7 @@ import WatermarkImage from '@/components/WatermarkImage'
 export default function ProductDetailPage() {
   const { id } = useParams<{ id: string }>()
   const navigate = useNavigate()
+  const { company } = useCompany()
   const [product, setProduct] = useState<ProductsS8B8A8A895Row | null>(null)
   const [loading, setLoading] = useState(true)
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
