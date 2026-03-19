@@ -100,7 +100,7 @@ function ContactPageContent() {
             {company?.wechat && (
               <div className="bg-white p-8 rounded-xl shadow-md hover-lift">
                 <div className="w-14 h-14 bg-emerald-100 rounded-full flex items-center justify-center mb-6">
-                  <Wechat className="w-7 h-7 text-emerald-600" />
+                  <MessageSquare className="w-7 h-7 text-emerald-600" />
                 </div>
                 <h3 className="text-xl font-bold text-gray-900 mb-3">微信</h3>
                 <p className="text-gray-600 leading-relaxed">{company.wechat}</p>
@@ -111,7 +111,7 @@ function ContactPageContent() {
             {company?.qq && (
               <div className="bg-white p-8 rounded-xl shadow-md hover-lift">
                 <div className="w-14 h-14 bg-blue-100 rounded-full flex items-center justify-center mb-6">
-                  <MessageCircle className="w-7 h-7 text-blue-500" />
+                  <MessageSquare className="w-7 h-7 text-blue-500" />
                 </div>
                 <h3 className="text-xl font-bold text-gray-900 mb-3">QQ</h3>
                 <p className="text-gray-600 leading-relaxed">{company.qq}</p>
@@ -122,7 +122,7 @@ function ContactPageContent() {
             {company?.fax && (
               <div className="bg-white p-8 rounded-xl shadow-md hover-lift">
                 <div className="w-14 h-14 bg-gray-100 rounded-full flex items-center justify-center mb-6">
-                  <Fax className="w-7 h-7 text-gray-600" />
+                  <Phone className="w-7 h-7 text-gray-600" />
                 </div>
                 <h3 className="text-xl font-bold text-gray-900 mb-3">传真</h3>
                 <p className="text-gray-600 leading-relaxed">{company.fax}</p>
