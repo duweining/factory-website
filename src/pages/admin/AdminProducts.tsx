@@ -4,6 +4,8 @@ import { Plus, Edit, Trash2, Upload, X } from 'lucide-react'
 import { ProductsS8B8A8A895Row, ProductsS8B8A8A895Insert } from '@/types/database'
 import { supabase } from '@/lib/supabase'
 
+const BUCKET_NAME = 'Tenant-dinga3a6b534e09b1264ffe93478753d9884'
+
 export default function AdminProducts() {
   const [products, setProducts] = useState<ProductsS8B8A8A895Row[]>([])
   const [loading, setLoading] = useState(true)
@@ -117,11 +119,34 @@ export default function AdminProducts() {
     setEditingProduct(null)
   }
 
+  const uploadToSupabase = async (file: File): Promise<string | null> => {
+    const fileExt = file.name.split('.').pop()
+    const fileName = `${Date.now()}-${Math.random().toString(36).substring(2)}.${fileExt}`
+    const filePath = `products/${fileName}`
+
+    const { data, error } = await supabase.storage
+      .from(BUCKET_NAME)
+      .upload(filePath, file, {
+        cacheControl: '3600',
+        upsert: false,
+      })
+
+    if (error) {
+      console.error('Upload error:', error)
+      return null
+    }
+
+    const { data: urlData } = supabase.storage
+      .from(BUCKET_NAME)
+      .getPublicUrl(filePath)
+
+    return urlData?.publicUrl || null
+  }
+
   const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files
     if (!files || files.length === 0) return
 
-    // 检查图片数量限制
     const currentImages = (formData.images as string[]) || []
     if (currentImages.length + files.length > 5) {
       alert('最多只能上传 5 张图片')
@@ -130,12 +155,18 @@ export default function AdminProducts() {
 
     setUploading(true)
     try {
-      // 这里简化处理，实际应该上传到 Supabase Storage
-      // 现在使用本地预览 URL
-      const newImages = Array.from(files).map((file) => URL.createObjectURL(file))
+      const uploadPromises = Array.from(files).map((file) => uploadToSupabase(file))
+      const uploadedUrls = await Promise.all(uploadPromises)
+      const validUrls = uploadedUrls.filter((url): url is string => url !== null)
+
+      if (validUrls.length === 0) {
+        alert('图片上传失败，请重试')
+        return
+      }
+
       setFormData({
         ...formData,
-        images: [...(formData.images as string[]), ...newImages],
+        images: [...currentImages, ...validUrls],
       })
     } catch (error) {
       console.error('Error uploading image:', error)
