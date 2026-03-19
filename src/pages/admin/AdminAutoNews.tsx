@@ -154,7 +154,6 @@ export default function AdminAutoNews() {
     if (!confirm('确定要立即生成一篇新闻吗？')) return
 
     try {
-      // 调用数据库函数手动生成一篇
       const { error } = await supabase.rpc('generate_auto_news')
       
       if (error) throw error
@@ -164,6 +163,26 @@ export default function AdminAutoNews() {
     } catch (error) {
       console.error('Error generating news:', error)
       setMessage({ type: 'error', text: '生成失败，请重试' })
+    }
+  }
+
+  async function checkAndRunScheduledTask() {
+    try {
+      const { data, error } = await supabase
+        .from('auto_news_config')
+        .select('*')
+        .eq('is_enabled', true)
+        .eq('is_deleted', 'n')
+        .single()
+
+      if (error || !data) return
+
+      if (data.next_run_time && new Date(data.next_run_time) <= new Date()) {
+        await supabase.rpc('generate_auto_news')
+        fetchConfig()
+      }
+    } catch (error) {
+      console.error('Error checking scheduled task:', error)
     }
   }
 
