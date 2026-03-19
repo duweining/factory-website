@@ -147,6 +147,47 @@ export default function HomePage() {
 
       {/* Features Section */}
       <section className="py-20 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">核心优势</h2>
+            <p className="text-xl text-gray-600">为什么选择我们</p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {[
+              {
+                title: '品质保证',
+                description: '严格的质量控制体系，确保每一件产品都符合最高标准',
+                icon: '✓',
+              },
+              {
+                title: '技术创新',
+                description: '持续研发投入，引领行业技术发展',
+                icon: '⚡',
+              },
+              {
+                title: '优质服务',
+                description: '专业的售前售后服务团队，全程为您保驾护航',
+                icon: '♥',
+              },
+            ].map((feature, index) => (
+              <div
+                key={index}
+                className="bg-white p-8 rounded-xl card-hover shadow-sm"
+              >
+                <div className="w-14 h-14 bg-primary-100 rounded-full flex items-center justify-center mb-6">
+                  <span className="text-2xl">{feature.icon}</span>
+                </div>
+                <h3 className="text-2xl font-bold text-gray-900 mb-4">
+                  {feature.title}
+                </h3>
+                <p className="text-gray-600 leading-relaxed">
+                  {feature.description}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
 
       {/* CTA Section */}
       <section className="py-20 bg-primary-600">
