@@ -61,12 +61,6 @@ export default function Navbar() {
                 {link.label}
               </Link>
             ))}
-            <Link
-              to="/admin/login"
-              className="px-6 py-2.5 bg-primary-600 text-white rounded-lg btn-glow font-medium"
-            >
-              管理后台
-            </Link>
           </div>
 
           <button
