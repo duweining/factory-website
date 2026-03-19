@@ -124,7 +124,7 @@ export default function ProductsPage() {
 }
 
 function ProductCard({ product }: { product: ProductsS8B8A8A895Row }) {
-  const images = (product.images as string[]) || []
+  const images = (product.images as string[] | null) || []
   const mainImage = images[0]
 
   return (
