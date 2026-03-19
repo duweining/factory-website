@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Save } from 'lucide-react'
+import AdminLayout from '@/components/AdminLayout'
 import { useSeo, PageType } from '@/hooks/useSeo'
 
 const pageConfig: { type: PageType; name: string }[] = [
