@@ -186,16 +186,28 @@ export default function AdminAutoNews() {
   async function handleGenerateNow() {
     if (!confirm('确定要立即生成一篇新闻吗？')) return
 
+    setSaving(true)
+    setMessage(null)
     try {
-      const { error } = await supabase.rpc('generate_auto_news')
+      console.log('Calling generate_auto_news RPC...')
+      const { data, error } = await supabase.rpc('generate_auto_news')
       
-      if (error) throw error
-
+      if (error) {
+        console.error('RPC error:', error)
+        throw error
+      }
+      
+      console.log('Generation successful:', data)
       setMessage({ type: 'success', text: '新闻已生成！' })
       fetchConfig()
     } catch (error) {
       console.error('Error generating news:', error)
-      setMessage({ type: 'error', text: '生成失败，请重试' })
+      setMessage({ 
+        type: 'error', 
+        text: '生成失败：' + (error as Error).message + '。请检查是否已启动自动发布功能。' 
+      })
+    } finally {
+      setSaving(false)
     }
   }
 
