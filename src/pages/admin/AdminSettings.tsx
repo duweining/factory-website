@@ -188,7 +188,7 @@ export default function AdminSettings() {
     try {
       // 上传到 Supabase Storage
       const fileName = `banner_${Date.now()}_${file.name}`
-      const { data: uploadData, error: uploadError } = await supabase.storage
+      const { error: uploadError } = await supabase.storage
         .from('Tenant-dinga3a6b534e09b1264ffe93478753d9884')
         .upload(`public/${fileName}`, file, {
           cacheControl: '3600',
