@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import AdminLayout from '@/components/AdminLayout'
-import { Plus, Edit, Trash2, Upload, X, Eye, EyeOff } from 'lucide-react'
+import { Plus, Edit, Trash2, Upload, X } from 'lucide-react'
 import { ProductsS8B8A8A895Row, ProductsS8B8A8A895Insert } from '@/types/database'
 import { supabase } from '@/lib/supabase'
 
