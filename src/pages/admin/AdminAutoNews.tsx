@@ -122,9 +122,12 @@ export default function AdminAutoNews() {
     if (!config) return
     
     setSaving(true)
+    setMessage(null)
     try {
       const newState = !isEnabled
-      const { error } = await supabase
+      console.log('Updating config to:', newState)
+      
+      const { data: updateData, error: updateError } = await supabase
         .from('auto_news_config')
         .update({
           is_enabled: newState,
@@ -134,9 +137,14 @@ export default function AdminAutoNews() {
           updated_at: new Date().toISOString(),
         })
         .eq('id', config.id)
+        .select()
 
-      if (error) throw error
+      if (updateError) {
+        console.error('Update error:', updateError)
+        throw updateError
+      }
       
+      console.log('Update successful:', updateData)
       setIsEnabled(newState)
       setMessage({
         type: 'success',
@@ -145,21 +153,31 @@ export default function AdminAutoNews() {
       
       // 立即检查并执行一次（如果已到时间）
       if (newState) {
-        const { data: updatedData } = await supabase
-          .from('auto_news_config')
-          .select('*')
-          .eq('id', config.id)
-          .single()
-        
-        if (updatedData && updatedData.next_run_time && new Date(updatedData.next_run_time) <= new Date()) {
-          await supabase.rpc('generate_auto_news')
+        console.log('Checking if immediate execution is needed...')
+        if (updateData && updateData[0] && updateData[0].next_run_time) {
+          const nextRun = new Date(updateData[0].next_run_time)
+          const now = new Date()
+          console.log('Next run time:', nextRun, 'Current time:', now)
+          
+          if (nextRun <= now) {
+            console.log('Executing immediate generation...')
+            const { error: rpcError } = await supabase.rpc('generate_auto_news')
+            if (rpcError) {
+              console.error('RPC error:', rpcError)
+            } else {
+              console.log('Immediate generation successful')
+            }
+          }
         }
       }
       
       fetchConfig()
     } catch (error) {
       console.error('Error toggling:', error)
-      setMessage({ type: 'error', text: '操作失败，请重试' })
+      setMessage({ 
+        type: 'error', 
+        text: '操作失败：' + (error as Error).message 
+      })
     } finally {
       setSaving(false)
     }
