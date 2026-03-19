@@ -3,6 +3,8 @@ import { useParams, Link, useNavigate } from 'react-router-dom'
 import { ChevronLeft, ChevronLeftCircle, ChevronRightCircle } from 'lucide-react'
 import { ProductsS8B8A8A895Row } from '@/types/database'
 import { supabase } from '@/lib/supabase'
+import { useCompany } from '@/hooks/useCompany'
+import WatermarkImage from '@/components/WatermarkImage'
 
 export default function ProductDetailPage() {
   const { id } = useParams<{ id: string }>()
