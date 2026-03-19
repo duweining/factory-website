@@ -15,6 +15,7 @@ import AdminNews from './pages/admin/AdminNews'
 import AdminSettings from './pages/admin/AdminSettings'
 import AdminCases from './pages/admin/AdminCases'
 import AdminSeo from './pages/admin/AdminSeo'
+import BatchNewsGenerator from './pages/admin/BatchNewsGenerator'
 
 export default function App() {
   return (
