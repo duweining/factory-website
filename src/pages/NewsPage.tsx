@@ -3,8 +3,9 @@ import { Calendar, User, ChevronRight } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { NewsS8B8A8A895Row } from '@/types/database'
 import { supabase } from '@/lib/supabase'
+import SeoProvider from '@/components/SeoProvider'
 
-export default function NewsPage() {
+function NewsPageContent() {
   const [news, setNews] = useState<NewsS8B8A8A895Row[]>([])
   const [loading, setLoading] = useState(true)
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null)

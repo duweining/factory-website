@@ -3,8 +3,9 @@ import { CasesS8B8A8A895Row } from '@/types/database'
 import { supabase } from '@/lib/supabase'
 import { useCompany } from '@/hooks/useCompany'
 import WatermarkImage from '@/components/WatermarkImage'
+import SeoProvider from '@/components/SeoProvider'
 
-export default function CasesPage() {
+function CasesPageContent() {
   const [cases, setCases] = useState<CasesS8B8A8A895Row[]>([])
   const [loading, setLoading] = useState(true)
   const [columns, setColumns] = useState<CasesS8B8A8A895Row[][]>([[], [], [], []])

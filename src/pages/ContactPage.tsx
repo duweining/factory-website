@@ -1,7 +1,8 @@
 import { MapPin, Phone, Mail, Clock, Globe } from 'lucide-react'
 import { useCompany } from '@/hooks/useCompany'
+import SeoProvider from '@/components/SeoProvider'
 
-export default function ContactPage() {
+function ContactPageContent() {
   const { company, loading } = useCompany()
 
   if (loading) {
