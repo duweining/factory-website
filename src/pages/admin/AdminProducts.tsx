@@ -49,6 +49,7 @@ export default function AdminProducts() {
     setUploading(true)
 
     try {
+      console.log('Saving product with images:', formData.images)
       if (editingProduct) {
         const { error } = await supabase
           .from('products_s_8b8a8a89_5')
