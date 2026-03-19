@@ -5,7 +5,7 @@ import { supabase } from '@/lib/supabase'
 export default function CasesPage() {
   const [cases, setCases] = useState<CasesS8B8A8A895Row[]>([])
   const [loading, setLoading] = useState(true)
-  const [columns, setColumns] = useState<CasesS8B8A8A895Row[][]>([[], [], []])
+  const [columns, setColumns] = useState<CasesS8B8A8A895Row[][]>([[], [], [], []])
 
   useEffect(() => {
     fetchCases()
