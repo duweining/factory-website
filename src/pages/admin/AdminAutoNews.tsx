@@ -85,7 +85,7 @@ export default function AdminAutoNews() {
         return
       }
 
-      let result
+      let savedData
       if (config) {
         // 更新现有配置
         const { data: updateData, error } = await supabase
@@ -106,7 +106,7 @@ export default function AdminAutoNews() {
           throw error
         }
         
-        result = updateData
+        savedData = updateData
         console.log('Update successful:', updateData)
       } else {
         // 插入新配置
@@ -129,7 +129,7 @@ export default function AdminAutoNews() {
           throw error
         }
         
-        result = insertData
+        savedData = insertData
         console.log('Insert successful:', insertData)
       }
 
