@@ -317,6 +317,20 @@ export default function AdminNews() {
 
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
+                  发布时间
+                </label>
+                <input
+                  type="datetime-local"
+                  value={formData.published_at ? new Date(formData.published_at).toISOString().slice(0, 16) : ''}
+                  onChange={(e) =>
+                    setFormData({ ...formData, published_at: new Date(e.target.value).toISOString() })
+                  }
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
                   摘要
                 </label>
                 <textarea
