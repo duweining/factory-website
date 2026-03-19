@@ -45,6 +45,10 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     { name: '企业设置', href: '/admin/settings', icon: Settings },
   ]
 
+  const externalLinks = [
+    { name: '企业首页', href: '/', icon: Home, target: '_blank' },
+  ]
+
   if (!user) {
     return <div className="min-h-screen flex items-center justify-center">加载中...</div>
   }
