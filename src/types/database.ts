@@ -68,7 +68,7 @@ export interface NewsS8B8A8A895Row {
   created_at: string | null;
   updated_at: string | null;
 }
-export type NewsS8B8A8A895Insert = Omit<NewsS8B8A8A895Row, 'id', 'corp_id', 'emp_id', 'is_deleted', 'created_at', 'updated_at'>;
+export type NewsS8B8A8A895Insert = Omit<NewsS8B8A8A895Row, 'id' | 'corp_id' | 'emp_id' | 'is_deleted' | 'created_at' | 'updated_at'>;
 export type NewsS8B8A8A895Update = Partial<NewsS8B8A8A895Insert>;
 
 export interface ProductsS8B8A8A895Row {
