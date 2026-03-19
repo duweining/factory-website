@@ -92,6 +92,18 @@ export default function App() {
               </>
             }
           />
+          <Route
+            path="/cases"
+            element={
+              <>
+                <Navbar />
+                <main className="flex-grow pt-20">
+                  <CasesPage />
+                </main>
+                <Footer />
+              </>
+            }
+          />
           <Route path="/admin/login" element={<AdminLogin />} />
           <Route path="/admin/dashboard" element={<AdminDashboard />} />
           <Route path="/admin/products" element={<AdminProducts />} />
