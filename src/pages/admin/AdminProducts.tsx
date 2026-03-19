@@ -240,7 +240,7 @@ export default function AdminProducts() {
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
             {products.map((product) => {
-              const images = product.images as string[] || []
+              const images = (product.images as string[] | null) || []
               return (
                 <tr key={product.id} className="hover:bg-gray-50">
                   <td className="px-6 py-4">
