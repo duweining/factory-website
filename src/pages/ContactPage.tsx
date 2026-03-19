@@ -68,17 +68,6 @@ export default function ContactPage() {
               </div>
             )}
 
-            {/* Fax */}
-            {company?.fax && (
-              <div className="bg-white p-8 rounded-xl shadow-md hover-lift">
-                <div className="w-14 h-14 bg-primary-100 rounded-full flex items-center justify-center mb-6">
-                  <Fax className="w-7 h-7 text-primary-600" />
-                </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-3">传真号码</h3>
-                <p className="text-gray-600 leading-relaxed">{company.fax}</p>
-              </div>
-            )}
-
             {/* Working Hours */}
             <div className="bg-white p-8 rounded-xl shadow-md hover-lift">
               <div className="w-14 h-14 bg-primary-100 rounded-full flex items-center justify-center mb-6">
