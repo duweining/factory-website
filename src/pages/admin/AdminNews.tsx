@@ -259,7 +259,7 @@ export default function AdminNews() {
             ))}
             {news.length === 0 && (
               <tr>
-                <td colSpan={7} className="px-6 py-12 text-center text-gray-500">
+                <td colSpan={8} className="px-6 py-12 text-center text-gray-500">
                   暂无新闻数据
                 </td>
               </tr>
