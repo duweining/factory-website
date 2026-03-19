@@ -263,7 +263,8 @@ function RelatedNews({ currentNewsId, category }: { currentNewsId: number; categ
             </Link>
           ))}
         </div>
-      </section>
+      </div>
+    </section>
     )
   }
 }
