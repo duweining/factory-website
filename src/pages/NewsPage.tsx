@@ -166,7 +166,7 @@ function NewsCard({ news }: { news: NewsS8B8A8A895Row }) {
               )}
               <div className="flex items-center">
                 <Calendar className="w-4 h-4 mr-1" />
-                {formatDate(news.created_at)}
+                {displayDate(news)}
               </div>
             </div>
             {news.view_count !== null && news.view_count > 0 && (
