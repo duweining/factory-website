@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import AdminLayout from '@/components/AdminLayout'
-import { Building, Key, Save } from 'lucide-react'
+import { Building, Key, Save, Phone, Mail, Globe, User, Clock, Wechat, MessageCircle, Fax } from 'lucide-react'
 import { CompaniesS8B8A8A895Row, CompaniesS8B8A8A895Insert } from '@/types/database'
 import { supabase } from '@/lib/supabase'
 
@@ -118,54 +118,30 @@ export default function AdminSettings() {
       return
     }
 
-    if (passwordForm.newPassword.length < 6) {
-      alert('新密码长度不能少于 6 位')
-      return
-    }
-
-    setUploading(true)
     try {
-      const user = localStorage.getItem('admin_user')
-      if (!user) {
-        alert('请先登录')
-        return
-      }
-
-      const userData = JSON.parse(user)
-
-      // 验证旧密码
-      const { data, error } = await supabase
+      const { data: user } = await supabase
         .from('admin_users')
         .select('*')
-        .eq('username', userData.username)
+        .eq('username', localStorage.getItem('admin_username'))
         .single()
 
-      if (error || !data) {
-        alert('用户不存在')
-        return
-      }
-
-      if (data.password_hash !== passwordForm.oldPassword) {
+      if (!user || user.password_hash !== passwordForm.oldPassword) {
         alert('原密码错误')
         return
       }
 
-      // 更新密码
-      const { error: updateError } = await supabase
+      const { error } = await supabase
         .from('admin_users')
         .update({ password_hash: passwordForm.newPassword })
-        .eq('id', data.id)
+        .eq('id', user.id)
 
-      if (updateError) throw updateError
+      if (error) throw error
 
-      alert('密码修改成功，请重新登录')
-      localStorage.removeItem('admin_user')
-      window.location.href = '/admin/login'
+      alert('密码修改成功')
+      setPasswordForm({ oldPassword: '', newPassword: '', confirmPassword: '' })
     } catch (error) {
       console.error('Error changing password:', error)
       alert('密码修改失败')
-    } finally {
-      setUploading(false)
     }
   }
 
@@ -175,7 +151,6 @@ export default function AdminSettings() {
 
     setUploading(true)
     try {
-      // 上传到 Supabase Storage
       const fileName = `logo_${Date.now()}_${file.name}`
       const { error: uploadError } = await supabase.storage
         .from('Tenant-dinga3a6b534e09b1264ffe93478753d9884')
@@ -186,7 +161,6 @@ export default function AdminSettings() {
 
       if (uploadError) throw uploadError
 
-      // 获取公开访问 URL
       const { data: urlData } = supabase.storage
         .from('Tenant-dinga3a6b534e09b1264ffe93478753d9884')
         .getPublicUrl(`public/${fileName}`)
@@ -206,7 +180,6 @@ export default function AdminSettings() {
 
     setUploading(true)
     try {
-      // 上传到 Supabase Storage
       const fileName = `banner_${Date.now()}_${file.name}`
       const { error: uploadError } = await supabase.storage
         .from('Tenant-dinga3a6b534e09b1264ffe93478753d9884')
@@ -217,7 +190,6 @@ export default function AdminSettings() {
 
       if (uploadError) throw uploadError
 
-      // 获取公开访问 URL
       const { data: urlData } = supabase.storage
         .from('Tenant-dinga3a6b534e09b1264ffe93478753d9884')
         .getPublicUrl(`public/${fileName}`)
@@ -272,7 +244,7 @@ export default function AdminSettings() {
 
         <div className="p-6">
           {activeTab === 'company' && (
-            <form onSubmit={handleCompanySubmit} className="space-y-6 max-w-3xl">
+            <form onSubmit={handleCompanySubmit} className="space-y-6 max-w-4xl">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
                   企业名称 *
@@ -417,6 +389,118 @@ export default function AdminSettings() {
                 />
               </div>
 
+              <div className="border-t pt-6 mt-6">
+                <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center">
+                  <Phone className="w-5 h-5 mr-2 text-primary-600" />
+                  详细联系方式
+                </h3>
+                
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2 flex items-center">
+                      <User className="w-4 h-4 mr-2 text-gray-500" />
+                      联系人
+                    </label>
+                    <input
+                      type="text"
+                      value={companyForm.contact_person || ''}
+                      onChange={(e) =>
+                        setCompanyForm({ ...companyForm, contact_person: e.target.value })
+                      }
+                      placeholder="请输入联系人姓名"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                    />
+                  </div>
+                  
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2 flex items-center">
+                      <Clock className="w-4 h-4 mr-2 text-gray-500" />
+                      营业时间
+                    </label>
+                    <input
+                      type="text"
+                      value={companyForm.business_hours || ''}
+                      onChange={(e) =>
+                        setCompanyForm({ ...companyForm, business_hours: e.target.value })
+                      }
+                      placeholder="例如：周一至周五 9:00-18:00"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                    />
+                  </div>
+                </div>
+
+                <div className="mt-6">
+                  <label className="block text-sm font-medium text-gray-700 mb-3">
+                    联系电话（多个，非必填）
+                  </label>
+                  <div className="space-y-4">
+                    {[1, 2, 3, 4, 5].map((num) => (
+                      <div key={num}>
+                        <input
+                          type="text"
+                          value={(companyForm as any)[`contact_phone${num}`] || ''}
+                          onChange={(e) =>
+                            setCompanyForm({ ...companyForm, [`contact_phone${num}`]: e.target.value })
+                          }
+                          placeholder={`联系电话 ${num}`}
+                          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                        />
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2 flex items-center">
+                      <Wechat className="w-4 h-4 mr-2 text-green-600" />
+                      微信
+                    </label>
+                    <input
+                      type="text"
+                      value={companyForm.wechat || ''}
+                      onChange={(e) =>
+                        setCompanyForm({ ...companyForm, wechat: e.target.value })
+                      }
+                      placeholder="请输入微信号"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                    />
+                  </div>
+                  
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2 flex items-center">
+                      <MessageCircle className="w-4 h-4 mr-2 text-blue-600" />
+                      QQ
+                    </label>
+                    <input
+                      type="text"
+                      value={companyForm.qq || ''}
+                      onChange={(e) =>
+                        setCompanyForm({ ...companyForm, qq: e.target.value })
+                      }
+                      placeholder="请输入 QQ 号"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                    />
+                  </div>
+                  
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2 flex items-center">
+                      <Fax className="w-4 h-4 mr-2 text-gray-500" />
+                      传真
+                    </label>
+                    <input
+                      type="text"
+                      value={companyForm.fax || ''}
+                      onChange={(e) =>
+                        setCompanyForm({ ...companyForm, fax: e.target.value })
+                      }
+                      placeholder="请输入传真号码"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                    />
+                  </div>
+                </div>
+              </div>
+
               <div className="pt-6 border-t">
                 <button
                   type="submit"
@@ -471,23 +555,18 @@ export default function AdminSettings() {
                   required
                   value={passwordForm.confirmPassword}
                   onChange={(e) =>
-                    setPasswordForm({
-                      ...passwordForm,
-                      confirmPassword: e.target.value,
-                    })
+                    setPasswordForm({ ...passwordForm, confirmPassword: e.target.value })
                   }
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
                 />
               </div>
 
-              <div className="pt-6 border-t">
+              <div className="pt-6">
                 <button
                   type="submit"
-                  disabled={uploading}
-                  className="px-8 py-3 bg-primary-600 text-white rounded-lg btn-glow font-medium flex items-center disabled:opacity-50"
+                  className="px-8 py-3 bg-primary-600 text-white rounded-lg btn-glow font-medium"
                 >
-                  <Save className="w-5 h-5 mr-2" />
-                  {uploading ? '修改中...' : '修改密码'}
+                  修改密码
                 </button>
               </div>
             </form>
