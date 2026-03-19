@@ -68,7 +68,7 @@ export default function ProductDetailPage() {
     )
   }
 
-  const images = (product.images as string[] | null) || []
+  const images = ((product.images as string[] | null) || []) as unknown as string[]
   const nextImage = () => {
     setCurrentImageIndex((prev) => (prev + 1) % images.length)
   }
