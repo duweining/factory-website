@@ -1,11 +1,40 @@
+import { useState, useEffect } from 'react'
 import { ChevronRight, ArrowRight } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { useCompany } from '@/hooks/useCompany'
+import { ProductsS8B8A8A895Row } from '@/types/database'
+import { supabase } from '@/lib/supabase'
 
 export default function HomePage() {
-  const { company, loading } = useCompany()
+  const { company, loading: companyLoading } = useCompany()
+  const [featuredProducts, setFeaturedProducts] = useState<ProductsS8B8A8A895Row[]>([])
+  const [productsLoading, setProductsLoading] = useState(true)
 
-  if (loading) {
+  useEffect(() => {
+    fetchFeaturedProducts()
+  }, [])
+
+  async function fetchFeaturedProducts() {
+    try {
+      const { data, error } = await supabase
+        .from('products_s_8b8a8a89_5')
+        .select('*')
+        .eq('is_deleted', 'n')
+        .eq('is_featured', true)
+        .order('sort_order', { ascending: true })
+        .order('created_at', { ascending: false })
+        .limit(6)
+
+      if (error) throw error
+      setFeaturedProducts(data || [])
+    } catch (error) {
+      console.error('Error fetching featured products:', error)
+    } finally {
+      setProductsLoading(false)
+    }
+  }
+
+  if (companyLoading) {
     return <div className="min-h-screen flex items-center justify-center">加载中...</div>
   }
 
@@ -92,42 +121,49 @@ export default function HomePage() {
             <h2 className="text-4xl font-bold text-gray-900 mb-4">热门产品</h2>
             <p className="text-xl text-gray-600">探索我们的优质产品线</p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {[1, 2, 3].map((item) => (
-              <div
-                key={item}
-                className="bg-white rounded-xl overflow-hidden shadow-sm card-hover group"
+          
+          {productsLoading ? (
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              {[1, 2, 3].map((item) => (
+                <div key={item} className="bg-white rounded-xl overflow-hidden shadow-sm animate-pulse">
+                  <div className="aspect-w-4 aspect-h-3 bg-gray-200" />
+                  <div className="p-6 space-y-4">
+                    <div className="h-6 bg-gray-200 rounded w-3/4" />
+                    <div className="h-4 bg-gray-200 rounded w-full" />
+                    <div className="h-4 bg-gray-200 rounded w-2/3" />
+                  </div>
+                </div>
+              ))}
+            </div>
+          ) : featuredProducts.length === 0 ? (
+            <div className="text-center py-12 bg-gray-50 rounded-xl">
+              <p className="text-gray-600 mb-4">暂无推荐产品</p>
+              <Link
+                to="/products"
+                className="inline-flex items-center text-primary-600 font-medium hover:text-primary-700"
               >
-                <div className="aspect-w-4 aspect-h-3 bg-gray-200 relative overflow-hidden">
-                  <div className="absolute inset-0 bg-gradient-to-br from-primary-100 to-primary-200" />
-                </div>
-                <div className="p-6">
-                  <h3 className="text-xl font-bold text-gray-900 mb-2">
-                    产品名称 {item}
-                  </h3>
-                  <p className="text-gray-600 mb-4">
-                    产品描述文字，介绍产品的特点和优势
-                  </p>
-                  <Link
-                    to="/products"
-                    className="inline-flex items-center text-primary-600 font-medium hover:text-primary-700"
-                  >
-                    了解更多
-                    <ChevronRight className="w-4 h-4 ml-1" />
-                  </Link>
-                </div>
+                查看全部产品
+                <ChevronRight className="w-4 h-4 ml-1" />
+              </Link>
+            </div>
+          ) : (
+            <>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {featuredProducts.map((product) => (
+                  <ProductCard key={product.id} product={product} />
+                ))}
               </div>
-            ))}
-          </div>
-          <div className="text-center mt-12">
-            <Link
-              to="/products"
-              className="inline-flex items-center px-8 py-4 bg-primary-600 text-white rounded-lg btn-glow font-semibold"
-            >
-              查看全部产品
-              <ArrowRight className="ml-2 w-5 h-5" />
-            </Link>
-          </div>
+              <div className="text-center mt-12">
+                <Link
+                  to="/products"
+                  className="inline-flex items-center px-8 py-4 bg-primary-600 text-white rounded-lg btn-glow font-semibold"
+                >
+                  查看全部产品
+                  <ArrowRight className="ml-2 w-5 h-5" />
+                </Link>
+              </div>
+            </>
+          )}
         </div>
       </section>
 
@@ -171,5 +207,55 @@ export default function HomePage() {
         </div>
       </section>
     </div>
+  )
+}
+
+function ProductCard({ product }: { product: ProductsS8B8A8A895Row }) {
+  const images = (product.images as string[]) || []
+  const mainImage = images[0]
+
+  return (
+    <Link to={`/products/${product.id}`} className="block group">
+      <div className="bg-white rounded-xl overflow-hidden shadow-sm card-hover">
+        <div className="aspect-w-4 aspect-h-3 bg-gray-200 relative overflow-hidden">
+          {mainImage ? (
+            <img
+              src={mainImage}
+              alt={product.name}
+              className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-300"
+            />
+          ) : (
+            <div className="absolute inset-0 bg-gradient-to-br from-primary-100 to-primary-200" />
+          )}
+          {product.is_featured && (
+            <div className="absolute top-4 right-4 bg-yellow-500 text-white px-3 py-1 rounded-full text-sm font-medium">
+              推荐
+            </div>
+          )}
+        </div>
+        <div className="p-6">
+          {product.category && (
+            <span className="text-sm text-primary-600 font-medium mb-2 block">
+              {product.category}
+            </span>
+          )}
+          <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-primary-600 transition-colors">
+            {product.name}
+          </h3>
+          <p className="text-gray-600 mb-4 line-clamp-2">
+            {product.description || '暂无描述'}
+          </p>
+          {product.price && (
+            <div className="text-2xl font-bold text-primary-600 mb-4">
+              ¥{product.price.toLocaleString()}
+            </div>
+          )}
+          <div className="flex items-center text-primary-600 font-medium">
+            了解更多
+            <ChevronRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
+          </div>
+        </div>
+      </div>
+    </Link>
   )
 }
