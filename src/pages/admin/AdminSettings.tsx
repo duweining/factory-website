@@ -469,7 +469,7 @@ export default function AdminSettings() {
                   
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2 flex items-center">
-                      <MessageCircle className="w-4 h-4 mr-2 text-blue-600" />
+                      <MessageSquare className="w-4 h-4 mr-2 text-blue-600" />
                       QQ
                     </label>
                     <input
@@ -485,7 +485,7 @@ export default function AdminSettings() {
                   
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2 flex items-center">
-                      <Fax className="w-4 h-4 mr-2 text-gray-500" />
+                      <Phone className="w-4 h-4 mr-2 text-gray-500" />
                       传真
                     </label>
                     <input
