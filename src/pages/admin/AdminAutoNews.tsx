@@ -118,7 +118,10 @@ export default function AdminAutoNews() {
   }
 
   async function handleToggle() {
-    if (!config) return
+    if (!config) {
+      setMessage({ type: 'error', text: '配置不存在，请先保存配置' })
+      return
+    }
     
     setSaving(true)
     setMessage(null)
@@ -140,6 +143,10 @@ export default function AdminAutoNews() {
 
       if (updateError) {
         console.error('Update error:', updateError)
+        // 检查是否是权限错误
+        if (updateError.code === '42501' || updateError.status === 403) {
+          throw new Error('您没有权限执行此操作，请联系管理员')
+        }
         throw updateError
       }
       
@@ -163,8 +170,12 @@ export default function AdminAutoNews() {
             const { error: rpcError } = await supabase.rpc('generate_auto_news')
             if (rpcError) {
               console.error('RPC error:', rpcError)
+              if (rpcError.code === '42501' || rpcError.status === 403) {
+                setMessage({ type: 'error', text: '您没有权限执行生成操作，请联系管理员' })
+              }
             } else {
               console.log('Immediate generation successful')
+              setMessage({ type: 'success', text: '自动发布已启动，并已立即生成一篇新闻！' })
             }
           }
         }
