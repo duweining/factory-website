@@ -101,3 +101,11 @@ function ContactPageContent() {
     </div>
   )
 }
+
+export default function ContactPage() {
+  return (
+    <SeoProvider pageType="contact">
+      <ContactPageContent />
+    </SeoProvider>
+  )
+}

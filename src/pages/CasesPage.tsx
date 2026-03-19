@@ -152,3 +152,11 @@ function CasesPageContent() {
     </div>
   )
 }
+
+export default function CasesPage() {
+  return (
+    <SeoProvider pageType="cases">
+      <CasesPageContent />
+    </SeoProvider>
+  )
+}
