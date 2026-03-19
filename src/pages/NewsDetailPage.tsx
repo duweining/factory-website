@@ -250,6 +250,34 @@ export default function NewsDetailPage() {
 
       {/* Related News */}
       <RelatedNews currentNewsId={news.id} category={news.category} />
+
+      {/* Random Images Gallery */}
+      {randomImages.length > 0 && (
+        <section className="py-12 bg-gray-50">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 className="text-2xl font-bold text-gray-900 mb-8 text-center">精彩展示</h2>
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+              {randomImages.map((imageUrl, index) => (
+                <div
+                  key={index}
+                  className="aspect-w-4 aspect-h-3 bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow"
+                >
+                  <WatermarkImage
+                    src={imageUrl}
+                    alt={`展示图片 ${index + 1}`}
+                    logoUrl={company?.logo_url}
+                    className="w-full h-full object-cover hover:scale-110 transition-transform duration-300"
+                    onError={(e) => {
+                      const target = e.target as HTMLImageElement
+                      target.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23f3f4f6" width="400" height="300"/%3E%3Ctext fill="%239ca3af" x="50%25" y="50%25" dominant-baseline="middle" text-anchor="middle" font-size="20"%3E图片加载失败%3C/text%3E%3C/svg%3E'
+                    }}
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
     </div>
   )
 }
