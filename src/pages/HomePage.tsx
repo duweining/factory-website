@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import { useCompany } from '@/hooks/useCompany'
 import { ProductsS8B8A8A895Row } from '@/types/database'
 import { supabase } from '@/lib/supabase'
+import WatermarkImage from '@/components/WatermarkImage'
 
 export default function HomePage() {
   const { company, loading: companyLoading } = useCompany()
