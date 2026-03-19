@@ -302,7 +302,7 @@ export default function AdminSettings() {
                 </label>
                 <textarea
                   rows={4}
-                  value={companyForm.description}
+                  value={companyForm.description || ''}
                   onChange={(e) =>
                     setCompanyForm({ ...companyForm, description: e.target.value })
                   }
@@ -316,7 +316,7 @@ export default function AdminSettings() {
                 </label>
                 <input
                   type="text"
-                  value={companyForm.address}
+                  value={companyForm.address || ''}
                   onChange={(e) =>
                     setCompanyForm({ ...companyForm, address: e.target.value })
                   }
@@ -331,7 +331,7 @@ export default function AdminSettings() {
                   </label>
                   <input
                     type="text"
-                    value={companyForm.phone}
+                    value={companyForm.phone || ''}
                     onChange={(e) =>
                       setCompanyForm({ ...companyForm, phone: e.target.value })
                     }
@@ -344,7 +344,7 @@ export default function AdminSettings() {
                   </label>
                   <input
                     type="email"
-                    value={companyForm.email}
+                    value={companyForm.email || ''}
                     onChange={(e) =>
                       setCompanyForm({ ...companyForm, email: e.target.value })
                     }
@@ -359,7 +359,7 @@ export default function AdminSettings() {
                 </label>
                 <input
                   type="url"
-                  value={companyForm.website}
+                  value={companyForm.website || ''}
                   onChange={(e) =>
                     setCompanyForm({ ...companyForm, website: e.target.value })
                   }
