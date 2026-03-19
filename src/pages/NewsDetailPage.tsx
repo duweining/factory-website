@@ -206,6 +206,23 @@ function RelatedNews({ currentNewsId, category }: { currentNewsId: number; categ
   const [relatedNews, setRelatedNews] = useState<NewsS8B8A8A895Row[]>([])
   const [loading, setLoading] = useState(true)
 
+  const formatDate = (dateString: string | null) => {
+    if (!dateString) return ''
+    return new Date(dateString).toLocaleDateString('zh-CN', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+      hour12: false,
+    })
+  }
+
+  const displayDate = (newsItem: NewsS8B8A8A895Row) => {
+    return formatDate(newsItem.published_at || newsItem.created_at)
+  }
+
   useEffect(() => {
     async function fetchRelatedNews() {
       try {
@@ -215,7 +232,7 @@ function RelatedNews({ currentNewsId, category }: { currentNewsId: number; categ
           .eq('is_deleted', 'n')
           .neq('id', currentNewsId)
           .order('is_featured', { ascending: false })
-          .order('created_at', { ascending: false })
+          .order('published_at', { ascending: false })
           .limit(3)
 
         if (category) {
