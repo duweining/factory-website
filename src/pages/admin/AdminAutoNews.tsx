@@ -144,7 +144,7 @@ export default function AdminAutoNews() {
       if (updateError) {
         console.error('Update error:', updateError)
         // 检查是否是权限错误
-        if (updateError.code === '42501' || updateError.status === 403) {
+        if (updateError.code === '42501') {
           throw new Error('您没有权限执行此操作，请联系管理员')
         }
         throw updateError
