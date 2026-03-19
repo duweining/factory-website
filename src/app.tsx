@@ -118,6 +118,6 @@ export default function App() {
           <Route path="/admin/settings" element={<AdminSettings />} />
         </Routes>
       </div>
-    </BrowserRouter>
+    </HashRouter>
   )
 }
